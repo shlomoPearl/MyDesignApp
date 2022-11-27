@@ -10,41 +10,42 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    Button sign_in = (Button) findViewById(R.id.signinbutton);
-    Button sign_up = (Button) findViewById(R.id.signupbutton);
-    Button skip = (Button) findViewById(R.id.skipbutton);
+    Button sign_in =  findViewById(R.id.signinbutton);
+    Button sign_up = findViewById(R.id.signupbutton);
+    Button skip = findViewById(R.id.skipbutton);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     public void onSigninBtn(View view){
         sign_in.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), Activity2.class);
-                startActivityForResult(myIntent, 0);
+                Intent myIntent = new Intent(view.getContext(), registresion.class);
+                startActivity(myIntent);
             }
-        }
+        });
     }
 
     public void onSignupBtn(View view){
         sign_up.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), Activity2.class);
-                startActivityForResult(myIntent, 0);
+                Intent myIntent1 = new Intent(view.getContext(), sign_in.class);
+                startActivity(myIntent1);
             }
-        }
+        });
 
     }
 
     public void onSkipBtn(View view){
         skip.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), Activity2.class);
-                startActivityForResult(myIntent, 0);
+                Intent myIntent2 = new Intent(view.getContext(), skip.class);
+                startActivity(myIntent2);
             }
-        }
+        });
 
     }
 }
