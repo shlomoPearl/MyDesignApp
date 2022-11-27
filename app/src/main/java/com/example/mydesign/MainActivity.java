@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) {
                     Toast.makeText(MainActivity.this, "Please enter user name and password", Toast.LENGTH_SHORT).show();
                 }
-
+                System.out.println(userName);
+                System.out.println(password);
                 // calling a method to login our user.
 //                loginUser(userName, password);
 
