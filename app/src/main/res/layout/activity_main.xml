@@ -7,49 +7,29 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="107dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="407dp"
-        android:layout_marginEnd="158dp"
-        android:layout_marginBottom="257dp"
-        android:text="Log in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/email"
+        android:id="@+id/signinbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="550dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="please enter e-mail:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:onClick="onSignupBtn"
+        android:text="Sign-in"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="120dp" />
 
-    <EditText
-        android:id="@+id/editTextTextPassword"
+    <Button
+        android:id="@+id/signupbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="211dp"
-        android:layout_marginEnd="102dp"
-        android:layout_marginBottom="475dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="passwerd:" />
+        android:onClick="onSignupBtn"
+        android:text="Sign-up"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="213dp" />
 
+    <Button
+        android:id="@+id/skipbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onSkipBtn"
+        android:text="SKIP"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="325dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
