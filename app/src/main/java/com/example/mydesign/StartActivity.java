@@ -1,4 +1,4 @@
-package com.rishav.firebasedemo;
+package com.example.mydesign;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class StartActivity extends AppCompatActivity {
@@ -20,10 +21,12 @@ public class StartActivity extends AppCompatActivity {
     private Button register;
     private Button login;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        FirebaseApp.initializeApp(null);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.start_activity);
 
         iconImage = findViewById(R.id.icon_image);
         linearLayout = findViewById(R.id.linear_layout);
@@ -80,7 +83,6 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             startActivity(new Intent(StartActivity.this , MainActivity.class));
             finish();
