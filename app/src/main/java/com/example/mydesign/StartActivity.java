@@ -10,8 +10,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class StartActivity extends AppCompatActivity {
@@ -19,29 +19,28 @@ public class StartActivity extends AppCompatActivity {
     private ImageView iconImage;
     private LinearLayout linearLayout;
     private Button register;
-    private Button login;
+    private Button sign_in;
+    private TextView admin_login;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        FirebaseApp.initializeApp(null);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
 
         iconImage = findViewById(R.id.icon_image);
         linearLayout = findViewById(R.id.linear_layout);
-        register = findViewById(R.id.register);
-        login = findViewById(R.id.login);
-
+        register = findViewById(R.id.sign_up);
+        sign_in = findViewById(R.id.sign_in);
+        admin_login = findViewById(R.id.admin_login);
         linearLayout.animate().alpha(0f).setDuration(10);
 
-        TranslateAnimation animation = new TranslateAnimation(0 , 0 , 0 , -1500);
-        animation.setDuration(1000);
-        animation.setFillAfter(false);
-        animation.setAnimationListener(new MyAnimationListener());
-
-        iconImage.setAnimation(animation);
-
+        admin_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StartActivity.this , AdminActivity.class));
+            }
+        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +48,7 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
+        sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(StartActivity.this , LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -58,27 +57,6 @@ public class StartActivity extends AppCompatActivity {
 
     }
 
-    private class MyAnimationListener implements Animation.AnimationListener {
-
-        @Override
-        public void onAnimationStart(Animation animation) {
-
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-
-            iconImage.clearAnimation();
-            iconImage.setVisibility(View.INVISIBLE);
-            linearLayout.animate().alpha(1f).setDuration(1000);
-
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-
-        }
-    }
 
     @Override
     protected void onStart() {
