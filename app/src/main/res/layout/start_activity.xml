@@ -27,17 +27,17 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Log In"
+            android:text="Sign In"
             android:textAllCaps="false"
-            android:id="@+id/login"/>
+            android:id="@+id/sign_in"/>
 
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Register"
+            android:text="Sign Up"
             android:textAllCaps="false"
-            android:id="@+id/register"/>
+            android:id="@+id/sign_up"/>
 
 
         <Button
@@ -48,5 +48,12 @@
             android:id="@+id/visit_guest"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/admin_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Admin LogIn" />
 
 </RelativeLayout>

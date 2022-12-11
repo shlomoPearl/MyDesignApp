@@ -39,7 +39,7 @@
         android:layout_marginTop="30sp"
         android:text="LOGIN"
         android:padding="10dp"
-        android:id="@+id/login"/>
+        android:id="@+id/sign_in"/>
 
 
     <TextView
