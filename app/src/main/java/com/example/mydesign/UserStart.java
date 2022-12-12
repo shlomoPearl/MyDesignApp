@@ -6,54 +6,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class StartActivity extends AppCompatActivity {
+public class UserStart extends AppCompatActivity {
 
-    private Button register;
-    private Button sign_in;
-    private TextView admin_login;
+    private Button sign_up; // for new user
+    private Button sign_in; // for exist user
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_activity);
+        setContentView(R.layout.user_start);
 
-        register = findViewById(R.id.sign_up);
+        sign_up = findViewById(R.id.sign_up);
         sign_in = findViewById(R.id.sign_in);
-        admin_login = findViewById(R.id.admin_login);
 
-        admin_login.setOnClickListener(new View.OnClickListener() {
+        sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StartActivity.this , AdminActivity.class));
-            }
-        });
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(StartActivity.this , RegisterActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(UserStart.this , UserSignUp.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StartActivity.this , UserLogin.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(UserStart.this , UserSignIn.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
     }
-
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if (FirebaseAuth.getInstance().getCurrentUser() != null){
-//            startActivity(new Intent(StartActivity.this , MainActivity.class));
-//            finish();
-//        }
-//    }
 }

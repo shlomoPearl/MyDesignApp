@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UserLogin extends AppCompatActivity {
+public class UserSignIn extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
@@ -30,7 +30,7 @@ public class UserLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.user_signin);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -42,7 +42,7 @@ public class UserLogin extends AppCompatActivity {
         registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserLogin.this , RegisterActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                startActivity(new Intent(UserSignIn.this , UserSignUp.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         });
 
@@ -53,7 +53,7 @@ public class UserLogin extends AppCompatActivity {
                 String txt_password = password.getText().toString();
 
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
-                    Toast.makeText(UserLogin.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserSignIn.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
                 } else {
                     loginUser(txt_email , txt_password);
                 }
@@ -67,9 +67,9 @@ public class UserLogin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    Toast.makeText(UserLogin.this, "Update the profile " +
+                    Toast.makeText(UserSignIn.this, "Update the profile " +
                             "for better expereince", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(UserLogin.this , MainActivity.class);
+                    Intent intent = new Intent(UserSignIn.this , UserMainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
@@ -78,7 +78,7 @@ public class UserLogin extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UserLogin.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserSignIn.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
