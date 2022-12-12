@@ -22,6 +22,8 @@ public class UserMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_main_activity);
         logout = findViewById(R.id.logout);
+        your_own_d = findViewById(R.id.your_own_btn);
+        existing_d = findViewById(R.id.existing_btn);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,7 @@ public class UserMainActivity extends AppCompatActivity {
                 startActivity(new Intent(UserMainActivity.this, UserClassify.class));
             }
         });
+
     }
 
 }
