@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="295sp"
         android:layout_centerHorizontal="true"
-        android:text="Choose from " />
+        android:text="Choose from an existence design" />
 
     <Button
         android:id="@+id/your_own_btn"
@@ -26,8 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="245sp"
         android:layout_centerHorizontal="true"
-
-        android:text="Design your own" />
+        android:text="Choose your own design" />
 
 
 </RelativeLayout>
