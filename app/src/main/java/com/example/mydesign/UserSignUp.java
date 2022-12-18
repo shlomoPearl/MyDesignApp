@@ -96,7 +96,7 @@ public class UserSignUp extends AppCompatActivity {
                 user_info.put("User Name",username);
                 user_info.put("Name",name);
                 user_info.put("Email",email);
-                user_info.put("Is User?",true);
+//                user_info.put("Is User?",true);
                 df.set(user_info);
                 pd.cancel();
                 Toast.makeText(UserSignUp.this,"Create account successfully!",Toast.LENGTH_SHORT).show();
