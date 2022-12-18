@@ -17,8 +17,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserSignUp extends AppCompatActivity {
 
@@ -29,7 +35,7 @@ public class UserSignUp extends AppCompatActivity {
     private Button sign_up;
     private TextView exist_user;
 
-    private DatabaseReference mRootRef;
+    private FirebaseFirestore store;
     private FirebaseAuth mAuth;
 
     ProgressDialog pd;
@@ -45,8 +51,7 @@ public class UserSignUp extends AppCompatActivity {
         password = findViewById(R.id.password);
         sign_up = findViewById(R.id.sign_up);
         exist_user = findViewById(R.id.login_user);
-
-        mRootRef = FirebaseDatabase.getInstance().getReference();
+        store = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         pd = new ProgressDialog(this);
 
@@ -85,7 +90,16 @@ public class UserSignUp extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                DocumentReference df = store.collection("Users").document(user.getUid());
+                Map<String, Object> user_info = new HashMap<>();
+                user_info.put("User Name",username);
+                user_info.put("Name",name);
+                user_info.put("Email",email);
+                user_info.put("Is User?",true);
+                df.set(user_info);
                 pd.cancel();
+                Toast.makeText(UserSignUp.this,"Create account successfully!",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UserSignUp.this , UserMainActivity.class);
                 startActivity(intent);
                 finish();
