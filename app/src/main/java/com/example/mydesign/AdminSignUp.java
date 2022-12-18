@@ -17,7 +17,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AdminSignUp extends AppCompatActivity {
 
@@ -29,7 +35,7 @@ public class AdminSignUp extends AppCompatActivity {
     private Button sign_up;
     private TextView exist_admin;
 
-    private DatabaseReference mRootRef;
+    private FirebaseFirestore store;
     private FirebaseAuth mAuth;
     private ProgressDialog pd;
 
@@ -83,7 +89,16 @@ public class AdminSignUp extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+                FirebaseUser admin = mAuth.getCurrentUser();
+                DocumentReference df = store.collection("Admins").document(admin.getUid());
+                Map<String, Object> admin_info = new HashMap<>();
+                admin_info.put("Company Name",company_name);
+                admin_info.put("Address",address);
+                admin_info.put("Phone Number", phone);
+                admin_info.put("Email",email);
+                df.set(admin_info);
                 pd.cancel();
+                Toast.makeText(AdminSignUp.this,"Create account successfully!",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AdminSignUp.this , AdminActivity.class);
                 startActivity(intent);
                 finish();
