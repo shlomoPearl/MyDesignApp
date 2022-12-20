@@ -33,6 +33,22 @@ public class UserMainActivity extends AppCompatActivity {
                 startActivity(new Intent(UserMainActivity.this, UserClassify.class));
             }
         });
+        existing_d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(UserMainActivity.this, "jump to admin activity!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(UserMainActivity.this, AdminActivity.class));
+            }
+        });
+        your_own_d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(UserMainActivity.this, "jump to admin activity!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(UserMainActivity.this, AdminActivity.class));
+            }
+        });
 
     }
 
