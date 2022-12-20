@@ -35,14 +35,12 @@ import com.google.firebase.storage.UploadTask;
 public class AdminActivity extends AppCompatActivity {
     private Button upload_btn;
     private Uri imageUri;
-    private static final int IMAGE_REQUEST = 2;
-    ArrayList<String> image_list;
-    RecyclerView recyclerView;
-    StorageReference root;
-    ProgressBar progressBar;
-    ImageDisplay image_display;
+    private ArrayList<String> image_list;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private ImageDisplay image_display;
     // clothes_uploads is the brunch that all image are upload there
-    StorageReference listRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads");
+    private StorageReference listRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
