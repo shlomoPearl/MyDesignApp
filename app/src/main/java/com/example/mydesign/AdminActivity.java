@@ -39,8 +39,7 @@ public class AdminActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private ImageDisplay image_display;
-    // clothes_uploads is the brunch that all image are upload there
-    private StorageReference listRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads");
+    private StorageReference listRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +51,8 @@ public class AdminActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
+        // clothes_uploads is the brunch that all image are upload there
+        listRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads");
 //        final ProgressDialog uploading = new ProgressDialog(this);
 //        uploading.show();
 
