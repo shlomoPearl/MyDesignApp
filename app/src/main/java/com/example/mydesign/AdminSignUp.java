@@ -52,7 +52,7 @@ public class AdminSignUp extends AppCompatActivity {
         exist_admin = findViewById(R.id.login_admin);
         pd = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
-
+        store = FirebaseFirestore.getInstance();
         exist_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +83,6 @@ public class AdminSignUp extends AppCompatActivity {
     }
 
     private void registerAdmin(String company_name, String address, String phone, String email, String password) {
-
         pd.setMessage("Please Wait!");
         pd.show();
         mAuth.createUserWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
