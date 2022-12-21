@@ -1,22 +1,35 @@
 package com.example.mydesign;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AdminSignIn extends AppCompatActivity {
 
@@ -24,7 +37,7 @@ public class AdminSignIn extends AppCompatActivity {
     private EditText password;
     private Button login;
     private TextView registerAdmin;
-
+    private FirebaseFirestore store;
     private FirebaseAuth mAuth;
 
     @Override
@@ -36,7 +49,7 @@ public class AdminSignIn extends AppCompatActivity {
         password = findViewById(R.id.password);
         login = findViewById(R.id.sign_in);
         registerAdmin = findViewById(R.id.register_user);
-
+        store = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         registerAdmin.setOnClickListener(new View.OnClickListener() {
@@ -62,16 +75,32 @@ public class AdminSignIn extends AppCompatActivity {
     }
 
     private void loginAdmin(String email, String password) {
-
-        mAuth.signInWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Intent intent = new Intent(AdminSignIn.this , AdminActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
-                }
+            // check if this account is user/admin
+            public void onSuccess(AuthResult authResult) {
+                store.collection("Admins").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<String> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                list.add(document.getId());
+                            }
+                            Log.d(TAG, list.toString());
+                            if (list.contains(authResult.getUser().getUid())){
+                                Intent intent = new Intent(AdminSignIn.this , AdminActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Toast.makeText(AdminSignIn.this, "This is not an account with admin privileges", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -79,6 +108,21 @@ public class AdminSignIn extends AppCompatActivity {
                 Toast.makeText(AdminSignIn.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
