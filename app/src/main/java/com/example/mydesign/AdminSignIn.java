@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -89,12 +90,14 @@ public class AdminSignIn extends AppCompatActivity {
                             }
                             Log.d(TAG, list.toString());
                             if (list.contains(authResult.getUser().getUid())){
-                                Intent intent = new Intent(AdminSignIn.this , AdminActivity.class);
+                                Intent intent = new Intent(AdminSignIn.this , AdminOrder.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
                             }else{
-                                Toast.makeText(AdminSignIn.this, "This is not an account with admin privileges", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AdminSignIn.this,
+                                        "This is not an account with admin privileges",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
