@@ -14,13 +14,8 @@ import java.util.ArrayList;
 
 public class ImageDisplay extends RecyclerView.Adapter<ImageDisplay.ViewHolder> {
     private ArrayList<String> imageList;
+    public Context context;
 
-    public ImageDisplay(ArrayList<String> imageList, Context context) {
-        this.imageList = imageList;
-        this.context = context;
-    }
-
-    private Context context;
     @NonNull
     @Override
     public ImageDisplay.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,5 +40,9 @@ public class ImageDisplay extends RecyclerView.Adapter<ImageDisplay.ViewHolder> 
             super(itemView);
             imageView=itemView.findViewById(R.id.item);
         }
+    }
+    public ImageDisplay(ArrayList<String> imageList, Context context) {
+        this.imageList = imageList;
+        this.context = context;
     }
 }
