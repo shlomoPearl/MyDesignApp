@@ -98,7 +98,7 @@ public class AdminSignUp extends AppCompatActivity {
                 df.set(admin_info);
                 pd.cancel();
                 Toast.makeText(AdminSignUp.this,"Create account successfully!",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AdminSignUp.this , AdminActivity.class);
+                Intent intent = new Intent(AdminSignUp.this , AdminOrder.class);
                 startActivity(intent);
                 finish();
             }
