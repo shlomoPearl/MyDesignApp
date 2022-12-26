@@ -44,8 +44,8 @@ public class UserMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(UserMainActivity.this, "jump to user activity!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UserMainActivity.this, UserActivity.class));
+                Toast.makeText(UserMainActivity.this, "jump to user design!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(UserMainActivity.this, UserDesign.class));
             }
         });
 
