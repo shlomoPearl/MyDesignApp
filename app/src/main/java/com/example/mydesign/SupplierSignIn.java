@@ -4,7 +4,6 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,21 +17,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class AdminSignIn extends AppCompatActivity {
+public class SupplierSignIn extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
@@ -56,7 +52,7 @@ public class AdminSignIn extends AppCompatActivity {
         registerAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminSignIn.this , UserSignUp.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                startActivity(new Intent(SupplierSignIn.this , UserSignUp.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         });
 
@@ -67,7 +63,7 @@ public class AdminSignIn extends AppCompatActivity {
                 String txt_password = password.getText().toString();
 
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
-                    Toast.makeText(AdminSignIn.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SupplierSignIn.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
                 } else {
                     loginAdmin(txt_email , txt_password);
                 }
@@ -90,12 +86,12 @@ public class AdminSignIn extends AppCompatActivity {
                             }
                             Log.d(TAG, list.toString());
                             if (list.contains(authResult.getUser().getUid())){
-                                Intent intent = new Intent(AdminSignIn.this , AdminOrder.class);
+                                Intent intent = new Intent(SupplierSignIn.this , SupplierOrder.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
                             }else{
-                                Toast.makeText(AdminSignIn.this,
+                                Toast.makeText(SupplierSignIn.this,
                                         "This is not an account with admin privileges",
                                         Toast.LENGTH_SHORT).show();
                             }
@@ -108,7 +104,7 @@ public class AdminSignIn extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(AdminSignIn.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SupplierSignIn.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

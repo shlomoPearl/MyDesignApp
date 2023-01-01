@@ -1,21 +1,15 @@
 package com.example.mydesign;
 import static android.content.ContentValues.TAG;
-import static androidx.core.content.ContextCompat.startActivity;
-
-import static com.google.common.io.Files.getFileExtension;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,37 +20,29 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Source;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class ImageDisplay_existence extends RecyclerView.Adapter<ImageDisplay_existence.ViewHolder> {
+public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExistence.ViewHolder> {
     private ArrayList<String> imageList;
     public Context context;
 
     @NonNull
     @Override
-    public ImageDisplay_existence.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ImageDisplayExistence.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_display_exitence,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageDisplay_existence.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ImageDisplayExistence.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(holder.itemView.getContext()).load(imageList.get(position)).into(holder.imageView);
         Snackbar mySnackbar = Snackbar.make(holder.imageView, "choose an item", 1000);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +154,7 @@ public class ImageDisplay_existence extends RecyclerView.Adapter<ImageDisplay_ex
         }
     }
 
-    public ImageDisplay_existence(ArrayList<String> imageList, Context context) {
+    public ImageDisplayExistence(ArrayList<String> imageList, Context context) {
         this.imageList = imageList;
         this.context = context;
     }

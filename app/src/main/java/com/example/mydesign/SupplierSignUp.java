@@ -18,14 +18,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdminSignUp extends AppCompatActivity {
+public class SupplierSignUp extends AppCompatActivity {
 
     private EditText company_name;
     private EditText address;
@@ -42,7 +41,7 @@ public class AdminSignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_signup);
+        setContentView(R.layout.supplier_signup);
         company_name = findViewById(R.id.companyname);
         address = findViewById(R.id.address);
         phone_number = findViewById(R.id.phone);
@@ -56,7 +55,7 @@ public class AdminSignUp extends AppCompatActivity {
         exist_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminSignUp.this , AdminSignIn.class));
+                startActivity(new Intent(SupplierSignUp.this , SupplierSignIn.class));
             }
         });
 
@@ -72,9 +71,9 @@ public class AdminSignUp extends AppCompatActivity {
                 if (TextUtils.isEmpty(txt_password) || TextUtils.isEmpty(txt_email)
                         || TextUtils.isEmpty(txt_address) || TextUtils.isEmpty(txt_phone)
                         || TextUtils.isEmpty(txt_company_name)){
-                    Toast.makeText(AdminSignUp.this, "Empty credentials!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SupplierSignUp.this, "Empty credentials!", Toast.LENGTH_SHORT).show();
                 } else if (txt_password.length() < 6){
-                    Toast.makeText(AdminSignUp.this, "Password too short!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SupplierSignUp.this, "Password too short!", Toast.LENGTH_SHORT).show();
                 } else {
                     registerAdmin(txt_company_name , txt_address , txt_phone , txt_email, txt_password);
                 }
@@ -97,8 +96,8 @@ public class AdminSignUp extends AppCompatActivity {
                 admin_info.put("Email",email);
                 df.set(admin_info);
                 pd.cancel();
-                Toast.makeText(AdminSignUp.this,"Create account successfully!",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AdminSignUp.this , AdminOrder.class);
+                Toast.makeText(SupplierSignUp.this,"Create account successfully!",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SupplierSignUp.this , SupplierOrder.class);
                 startActivity(intent);
                 finish();
             }
@@ -106,7 +105,7 @@ public class AdminSignUp extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 pd.dismiss();
-                Toast.makeText(AdminSignUp.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SupplierSignUp.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

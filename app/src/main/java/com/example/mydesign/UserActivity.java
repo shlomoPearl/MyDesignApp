@@ -40,7 +40,7 @@ public class UserActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     StorageReference root;
     ProgressBar progressBar;
-    ImageDisplay_existence image_display;
+    ImageDisplayExistence image_display;
     // clothes_uploads is the brunch that all image are upload there
     StorageReference listRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads");
 
@@ -51,7 +51,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.user_activity);
         image_list = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview1);
-        image_display = new ImageDisplay_existence(image_list, this);
+        image_display = new ImageDisplayExistence(image_list, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);

@@ -25,15 +25,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class AdminOrderDisplay extends RecyclerView.Adapter<AdminOrderDisplay.ViewHolder> {
+public class SupplierOrderDisplay extends RecyclerView.Adapter<SupplierOrderDisplay.ViewHolder> {
     private ArrayList<String> imageList;
     private FirebaseFirestore store;
     private ArrayList<String[]> info;
     public Context context;
 
-    public AdminOrderDisplay(ArrayList<String> imageList,ArrayList<String[]> info, Context context) {
+    public SupplierOrderDisplay(ArrayList<String> imageList, ArrayList<String[]> info, Context context) {
         this.imageList = imageList;
         this.info = info;
         this.context = context;
@@ -42,13 +41,13 @@ public class AdminOrderDisplay extends RecyclerView.Adapter<AdminOrderDisplay.Vi
 
     @NonNull
     @Override
-    public AdminOrderDisplay.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_order_display,parent,false);
-        return new AdminOrderDisplay.ViewHolder(view);
+    public SupplierOrderDisplay.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.supplier_order_display,parent,false);
+        return new SupplierOrderDisplay.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdminOrderDisplay.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull SupplierOrderDisplay.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.email.setText(info.get(position)[0]);
         holder.name.setText(info.get(position)[1]);
         holder.user_name.setText(info.get(position)[2]);

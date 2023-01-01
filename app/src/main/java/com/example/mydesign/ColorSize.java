@@ -21,7 +21,7 @@ public class ColorSize extends AppCompatActivity {
     private ArrayList<String[]> info;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private AdminOrderDisplay image_display;
+    private SupplierOrderDisplay image_display;
     private FirebaseFirestore store;
 
 ImageView iv1;
@@ -29,11 +29,11 @@ ImageView iv1;
     protected void onCreate(Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.admin_order);
+            setContentView(R.layout.supplier_order);
             image_list = new ArrayList<>();
             info = new ArrayList<>();
             recyclerView = findViewById(R.id.recyclerview);
-            image_display = new AdminOrderDisplay(image_list,info , this);
+            image_display = new SupplierOrderDisplay(image_list,info , this);
             recyclerView.setLayoutManager(new LinearLayoutManager(null));
             progressBar = findViewById(R.id.progress);
             progressBar.setVisibility(View.VISIBLE);

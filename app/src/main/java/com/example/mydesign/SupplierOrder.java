@@ -18,24 +18,24 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminOrder extends AppCompatActivity {
+public class SupplierOrder extends AppCompatActivity {
 
     private ArrayList<String> image_list;
     private ArrayList<String[]> info;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private AdminOrderDisplay image_display;
+    private SupplierOrderDisplay image_display;
     private FirebaseFirestore store;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_order);
+        setContentView(R.layout.supplier_order);
         image_list = new ArrayList<>();
         info = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview);
-        image_display = new AdminOrderDisplay(image_list,info , this);
+        image_display = new SupplierOrderDisplay(image_list,info , this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);

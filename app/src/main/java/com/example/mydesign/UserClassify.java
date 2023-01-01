@@ -33,7 +33,7 @@ public class UserClassify extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserClassify.this, AdminStart.class));
+                startActivity(new Intent(UserClassify.this, SupplierStart.class));
             }
         });
         user.setOnClickListener(new View.OnClickListener() {
