@@ -36,6 +36,7 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
     public Context context;
     private String[] size_table = {"S", "M", "L", "XL", "XXL"};
     private String size;
+
     @NonNull
     @Override
     public ImageDisplayExistence.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,35 +50,34 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Make Order:");
-                builder.setMessage("Would you like to continue to place your order?");
-                builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder order_dialog = new AlertDialog.Builder(context);
+                order_dialog.setTitle("Make Order:");
+                order_dialog.setMessage("Would you like to continue to place your order?");
+                order_dialog.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         System.out.println("order was make:"+imageList.get(position));
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                        builder1.setTitle("Choose a size:");
-                        builder1.setItems(size_table, new DialogInterface.OnClickListener() {
+                        AlertDialog.Builder size_build = new AlertDialog.Builder(context);
+                        size_build.setTitle("Choose a size:");
+                        size_build.setItems(size_table, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 size = size_table[which];
+                                upload_order(imageList.get(position), size);
                             }
                         });
-                        builder1.show();
-
+                        AlertDialog size_dialog = size_build.create();
+                        size_dialog.show();
                     }
                 });
-                builder.setNegativeButton("Cancel", null);
+                order_dialog.setNegativeButton("Cancel", null);
                 // create and show the alert dialog
-                AlertDialog dialog = builder.create();
+                AlertDialog dialog = order_dialog.create();
                 dialog.show();
-                System.out.println("size - " + size);
-                upload_order(imageList.get(position), size);
             }
         });
     }
-    public static void upload_order(String url,String size){
+    public static void upload_order(String url, String size){
         FirebaseFirestore store = FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -108,9 +108,6 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                 }
             }
         });
-
-
-
     }
 
 
