@@ -32,7 +32,7 @@ import android.widget.Toast;
 
 import com.google.firebase.storage.UploadTask;
 
-public class UserActivity extends AppCompatActivity {
+public class UserExistenceDesign extends AppCompatActivity {
     private Button upload_btn;
     private Uri imageUri;
     private static final int IMAGE_REQUEST = 2;
@@ -48,7 +48,7 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_activity);
+        setContentView(R.layout.user_existence_design);
         image_list = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview1);
         image_display = new ImageDisplayExistence(image_list, this);
@@ -126,7 +126,7 @@ public class UserActivity extends AppCompatActivity {
                             String url = uri.toString();
                             Log.d("DownloadUrl", url);
                             pd.cancel();
-                            Toast.makeText(UserActivity.this, "Image upload successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserExistenceDesign.this, "Image upload successful", Toast.LENGTH_SHORT).show();
 
                             // to display the new image
                             listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {

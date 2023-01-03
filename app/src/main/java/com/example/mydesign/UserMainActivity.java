@@ -37,7 +37,7 @@ public class UserMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(UserMainActivity.this, "jump to user activity!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UserMainActivity.this, UserActivity.class));
+                startActivity(new Intent(UserMainActivity.this, UserExistenceDesign.class));
             }
         });
         your_own_d.setOnClickListener(new View.OnClickListener() {
