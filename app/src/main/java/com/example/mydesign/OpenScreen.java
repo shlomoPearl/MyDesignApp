@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UserClassify extends AppCompatActivity {
+public class OpenScreen extends AppCompatActivity {
 
     private Button admin;
     private Button user;
@@ -18,7 +18,7 @@ public class UserClassify extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(UserClassify.this , UserMainActivity.class));
+            startActivity(new Intent(OpenScreen.this , UserMainActivity.class));
             finish();
         }
     }
@@ -26,20 +26,20 @@ public class UserClassify extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_classify);
+        setContentView(R.layout.open_screen);
         admin = findViewById(R.id.admin_btn);
         user= findViewById(R.id.user_btn);
 
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserClassify.this, SupplierStart.class));
+                startActivity(new Intent(OpenScreen.this, SupplierStart.class));
             }
         });
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent (UserClassify.this , UserStart.class));
+                startActivity(new Intent (OpenScreen.this , UserStart.class));
             }
         });
 
