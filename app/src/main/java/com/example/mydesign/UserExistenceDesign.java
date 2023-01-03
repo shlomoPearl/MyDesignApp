@@ -33,9 +33,7 @@ import android.widget.Toast;
 import com.google.firebase.storage.UploadTask;
 
 public class UserExistenceDesign extends AppCompatActivity {
-    private Button upload_btn;
     private Uri imageUri;
-    private static final int IMAGE_REQUEST = 2;
     ArrayList<String> image_list;
     RecyclerView recyclerView;
     StorageReference root;
@@ -55,17 +53,6 @@ public class UserExistenceDesign extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
-//        final ProgressDialog uploading = new ProgressDialog(this);
-//        uploading.show();
-
-//        upload_btn = findViewById(R.id.SelectImage1);
-//
-//        upload_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openImage();
-//            }
-//        });
 
         listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
