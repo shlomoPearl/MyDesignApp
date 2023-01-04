@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+
+    <Button
+        android:id="@+id/design"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make your design" />
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/design"
+        android:text="Send Design" />
+
+
+    <EditText
+        android:id="@+id/file_name"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/send"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/edit_text_price"
+        android:hint="Enter file name" />
+
+    <EditText
+        android:id="@+id/edit_text_price"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@+id/design"
+        android:layout_marginTop="9dp"
+        android:hint="Enter Price"
+        />
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edit_text_price"
+        android:layout_marginTop="9dp"
+        android:scrollbars="vertical"
+        android:hint="Enter Details about Product"
+        android:maxLines="10"
+        android:layout_marginStart="16dp"
+        />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/description"
+        android:layout_marginTop="16dp" />
+
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress_bar"-->
+<!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginBottom="10dp" />-->
+<!--    <TextView-->
+<!--        android:id="@+id/show_order"-->
+<!--        android:layout_width="120dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_below="@id/progress_bar"-->
+
+<!--        android:layout_toStartOf="@+id/show_user_design"-->
+<!--        android:layout_marginEnd="25dp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_alignBottom="@+id/show_user_design"-->
+<!--        android:layout_alignTop="@+id/show_user_design"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:background="@drawable/frame"-->
+<!--        android:text="Show Order"-->
+<!--        />-->
+<!--    <TextView-->
+<!--        android:id="@+id/show_user_design"-->
+<!--        android:layout_width="120dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp"-->
+<!--        android:background="@drawable/frame"-->
+<!--        android:text="Show User Design"-->
+<!--        />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/show_uploads"-->
+<!--        android:layout_width="120dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_alignBottom="@+id/show_user_design"-->
+<!--        android:layout_alignTop="@+id/show_user_design"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_toEndOf="@+id/show_user_design"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Your Shopping Cart"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:background="@drawable/frame"-->
+<!--        android:textSize="16sp" />-->
+
+</RelativeLayout>
