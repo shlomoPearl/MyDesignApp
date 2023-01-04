@@ -15,6 +15,21 @@
         android:theme="@style/Theme.Mydesign"
         tools:targetApi="31">
         <activity
+            android:name=".UserDesign"
+            android:exported="false"
+            android:parentActivityName=".UserMainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".HolderOrder"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".HolderSupplierUpload"
             android:exported="false">
             <meta-data
@@ -30,14 +45,16 @@
         </activity>
         <activity
             android:name=".ShowUploadActivity"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".SupplierMainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ShowOrderActivity"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".SupplierMainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -83,36 +100,26 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity> <!-- <activity -->
-        <!-- android:name=".AdminActivity" -->
-        <!-- android:exported="false"> -->
-        <!-- <meta-data -->
-        <!-- android:name="android.app.lib_name" -->
-        <!-- android:value="" /> -->
-        <!-- </activity> -->
         <activity
             android:name=".UserExistenceDesign"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UserDesign"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".UserMainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".SupplierStart"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".OpenScreen">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".UserStart"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".OpenScreen">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
