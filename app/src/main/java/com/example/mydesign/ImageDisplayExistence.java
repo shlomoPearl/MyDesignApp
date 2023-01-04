@@ -17,14 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +32,9 @@ import java.util.Map;
 
 public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExistence.ViewHolder> {
     private ArrayList<String> imageList;
+    private ArrayList<String> id_list;
     public Context context;
+    private String[] quantity_table = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     private String[] size_table = {"S", "M", "L", "XL", "XXL"};
     private String size;
 
@@ -56,14 +57,24 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                 order_dialog.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        System.out.println("order was make:"+imageList.get(position));
                         AlertDialog.Builder size_build = new AlertDialog.Builder(context);
                         size_build.setTitle("Choose a size:");
                         size_build.setItems(size_table, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 size = size_table[which];
-                                upload_order(imageList.get(position), size);
+                                AlertDialog.Builder quantity_build = new AlertDialog.Builder(context);
+                                quantity_build.setTitle("Choose a quantity:");
+                                quantity_build.setItems(quantity_table, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String quantity = quantity_table[which];
+                                        confirmOrder(imageList.get(position), id_list.get(position)
+                                                , size, quantity);
+                                    }
+                            });
+                            AlertDialog quantity_dialog = quantity_build.create();
+                            quantity_dialog.show();
                             }
                         });
                         AlertDialog size_dialog = size_build.create();
@@ -77,8 +88,9 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
             }
         });
     }
-    public static void upload_order(String url, String size){
+    public void confirmOrder(String url, String supplier_id ,String size, String quantity){
         FirebaseFirestore store = FirebaseFirestore.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         store.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -92,13 +104,15 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                             String name = document.get("Name").toString();
                             String user_name = document.get("User Name").toString();
                             // create collection Order
-                            CollectionReference df = store.collection("Orders");
+                            CollectionReference df = store.collection("Admins").
+                                    document(supplier_id).collection("Order");
                             Map<String, Object> user_info = new HashMap<>();
                             user_info.put("User Name",user_name);
                             user_info.put("Name",name);
                             user_info.put("Email",email);
                             user_info.put("URL",url);
                             user_info.put("SIZE",size);
+                            user_info.put("Quantity",quantity);
                             // add all the order detail to Order collection with unique id
                             df.add(user_info);
                         }
@@ -108,6 +122,8 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                 }
             }
         });
+//        Uri url_to_uri = Uri.parse(url);
+//        storage.getReference().child("Orders").putFile(url_to_uri);
     }
 
 
@@ -125,8 +141,9 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
         }
     }
 
-    public ImageDisplayExistence(ArrayList<String> imageList, Context context) {
+    public ImageDisplayExistence(ArrayList<String> imageList,ArrayList<String> id_list, Context context) {
         this.imageList = imageList;
+        this.id_list = id_list;
         this.context = context;
     }
 

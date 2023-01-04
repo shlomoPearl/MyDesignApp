@@ -89,6 +89,8 @@ public class SupplierSignUp extends AppCompatActivity {
             public void onSuccess(AuthResult authResult) {
                 FirebaseUser admin = mAuth.getCurrentUser();
                 DocumentReference df = store.collection("Admins").document(admin.getUid());
+                store.collection("Admins").document(admin.getUid())
+                        .collection("Order").document();
                 Map<String, Object> admin_info = new HashMap<>();
                 admin_info.put("Company Name",company_name);
                 admin_info.put("Address",address);
@@ -97,7 +99,7 @@ public class SupplierSignUp extends AppCompatActivity {
                 df.set(admin_info);
                 pd.cancel();
                 Toast.makeText(SupplierSignUp.this,"Create account successfully!",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SupplierSignUp.this , SupplierOrder.class);
+                Intent intent = new Intent(SupplierSignUp.this , SupplierMainActivity.class);
                 startActivity(intent);
                 finish();
             }

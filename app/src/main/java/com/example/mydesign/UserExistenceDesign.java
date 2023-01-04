@@ -16,6 +16,9 @@ import android.widget.ProgressBar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
@@ -33,14 +36,15 @@ import android.widget.Toast;
 import com.google.firebase.storage.UploadTask;
 
 public class UserExistenceDesign extends AppCompatActivity {
-    private Uri imageUri;
-    ArrayList<String> image_list;
-    RecyclerView recyclerView;
-    StorageReference root;
-    ProgressBar progressBar;
-    ImageDisplayExistence image_display;
+    private Uri image_uri;
+    private ArrayList<String> image_list;
+    private ArrayList<String> id_list;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private ImageDisplayExistence image_display;
+    private FirebaseFirestore db;
     // clothes_uploads is the brunch that all image are upload there
-    StorageReference listRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads");
+//    StorageReference listRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads");
 
 
     @Override
@@ -48,107 +52,126 @@ public class UserExistenceDesign extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_existence_design);
         image_list = new ArrayList<>();
+        id_list = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview1);
-        image_display = new ImageDisplayExistence(image_list, this);
+        image_display = new ImageDisplayExistence(image_list, id_list, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
-
-        listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+        db = FirebaseFirestore.getInstance();
+        db.collection("Supplier Uploads").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(ListResult listResult) {
-                for (StorageReference file : listResult.getItems()) {
-                    file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            image_list.add(uri.toString());
-                            Log.e("Item_value", uri.toString());
-                        }
-                    }).addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            recyclerView.setAdapter(image_display);
-                            progressBar.setVisibility(View.GONE);
-                        }
-                    });
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        System.out.println(document.getData());
+                        image_list.add(document.getString("Image URL"));
+                        id_list.add(document.getString("Supplier ID"));
+                    }
+                    image_display.notifyDataSetChanged();
+                    recyclerView.setAdapter(image_display);
+                    progressBar.setVisibility(View.GONE);
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
                 }
             }
         });
     }
+//        listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+//            @Override
+//            public void onSuccess(ListResult listResult) {
+//                for (StorageReference file : listResult.getItems()) {
+//                    file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//                            image_list.add(uri.toString());
+//                            Log.e("Item_value", uri.toString());
+//                        }
+//                    }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//                            recyclerView.setAdapter(image_display);
+//                            progressBar.setVisibility(View.GONE);
+//                        }
+//                    });
+//                }
+//            }
+//        });
+//    }
 
-    /**
-     * to upload image from gallery to firebase account
-     */
+//    /**
+//     * to upload image from gallery to firebase account
+//     */
+//
+//    private void openImage() {
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        launchSomeActivity.launch(intent);
+//    }
 
-    private void openImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        launchSomeActivity.launch(intent);
-    }
-
-    ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    imageUri = data.getData();
-                    uploadImage();
-                }
-            });
+//    ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(
+//            new ActivityResultContracts.StartActivityForResult(),
+//            result -> {
+//                if (result.getResultCode() == Activity.RESULT_OK) {
+//                    Intent data = result.getData();
+//                    imageUri = data.getData();
+//                    uploadImage();
+//                }
+//            });
 
 
-    private void uploadImage() {
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Uploading");
-        pd.show();
-        if (imageUri != null) {                                                                                            // the name of the image is the time + type extension
-            final StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-            fileRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String url = uri.toString();
-                            Log.d("DownloadUrl", url);
-                            pd.cancel();
-                            Toast.makeText(UserExistenceDesign.this, "Image upload successful", Toast.LENGTH_SHORT).show();
-
-                            // to display the new image
-                            listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-                                @Override
-                                public void onSuccess(ListResult listResult) {
-                                    for (StorageReference file : listResult.getItems()) {
-                                        file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri) {
-                                                // add only the new one
-                                                if (!image_list.contains(uri.toString())) {
-                                                    image_list.add(uri.toString());
-                                                    Log.e("Item_value", uri.toString());
-                                                }
-                                            }
-                                        }).addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri) {
-                                                recyclerView.setAdapter(image_display);
-                                                progressBar.setVisibility(View.GONE);
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        }
-    }
-
-    private String getFileExtension(Uri imageUri) {
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(imageUri));
-    }
+//    private void uploadImage() {
+//        final ProgressDialog pd = new ProgressDialog(this);
+//        pd.setMessage("Uploading");
+//        pd.show();
+//        if (imageUri != null) {                                                                                            // the name of the image is the time + type extension
+//            final StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+//            fileRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                    fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//                            String url = uri.toString();
+//                            Log.d("DownloadUrl", url);
+//                            pd.cancel();
+//                            Toast.makeText(UserExistenceDesign.this, "Image upload successful", Toast.LENGTH_SHORT).show();
+//
+//                            // to display the new image
+//                            listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+//                                @Override
+//                                public void onSuccess(ListResult listResult) {
+//                                    for (StorageReference file : listResult.getItems()) {
+//                                        file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                            @Override
+//                                            public void onSuccess(Uri uri) {
+//                                                // add only the new one
+//                                                if (!image_list.contains(uri.toString())) {
+//                                                    image_list.add(uri.toString());
+//                                                    Log.e("Item_value", uri.toString());
+//                                                }
+//                                            }
+//                                        }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                            @Override
+//                                            public void onSuccess(Uri uri) {
+//                                                recyclerView.setAdapter(image_display);
+//                                                progressBar.setVisibility(View.GONE);
+//                                            }
+//                                        });
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    });
+//                }
+//            });
+//        }
+//    }
+//
+//    private String getFileExtension(Uri imageUri) {
+//        ContentResolver contentResolver = getContentResolver();
+//        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+//        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(imageUri));
+//    }
 }

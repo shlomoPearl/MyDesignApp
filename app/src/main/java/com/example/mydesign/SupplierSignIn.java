@@ -86,7 +86,7 @@ public class SupplierSignIn extends AppCompatActivity {
                             }
                             Log.d(TAG, list.toString());
                             if (list.contains(authResult.getUser().getUid())){
-                                Intent intent = new Intent(SupplierSignIn.this , SupplierOrder.class);
+                                Intent intent = new Intent(SupplierSignIn.this , SupplierMainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
