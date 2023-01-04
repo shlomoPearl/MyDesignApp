@@ -25,7 +25,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -33,12 +32,12 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class SupplierMainActivity extends AppCompatActivity {
     private static final int CHOOSE_IMAGE = 1;
     private Button choose_file;
     private Button upload;
+    private Button logout;
     private TextView show_order;
     private TextView show_user_design;
     private TextView show_upload;
@@ -51,8 +50,9 @@ public class SupplierMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.supplier_activity_main);
-        choose_file = findViewById(R.id.button_choose_image);
-        upload = findViewById(R.id.button_upload);
+        choose_file = findViewById(R.id.design);
+        upload = findViewById(R.id.send);
+        logout = findViewById(R.id.logout);
         show_order = findViewById(R.id.show_order);
         show_user_design = findViewById(R.id.show_user_design);
         show_upload = findViewById(R.id.show_uploads);
@@ -61,6 +61,14 @@ public class SupplierMainActivity extends AppCompatActivity {
         product_description = findViewById(R.id.description);
         image_preview = findViewById(R.id.image_view);
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(SupplierMainActivity.this, OpenScreen.class));
+                finish();
+            }
+        });
         choose_file.setOnClickListener(view -> showFileChoose());
         upload.setOnClickListener(new View.OnClickListener() {
             @Override

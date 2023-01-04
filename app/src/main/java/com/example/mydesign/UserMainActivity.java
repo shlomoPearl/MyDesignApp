@@ -45,7 +45,7 @@ public class UserMainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(UserMainActivity.this, "jump to user design!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UserMainActivity.this, UserMainActivity.class));
+                startActivity(new Intent(UserMainActivity.this, UserDesign.class));
             }
         });
 
