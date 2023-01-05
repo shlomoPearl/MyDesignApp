@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +42,7 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
     @NonNull
     @Override
     public ImageDisplayExistence.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_display_exitence,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_display_existence,parent,false);
         return new ViewHolder(view);
     }
 
@@ -114,7 +115,16 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                             user_info.put("SIZE",size);
                             user_info.put("Quantity",quantity);
                             // add all the order detail to Order collection with unique id
-                            df.add(user_info);
+                            df.add(user_info).addOnCompleteListener(new OnCompleteListener() {
+                                @Override
+                                public void onComplete(@NonNull Task task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(context, "Order has been placed successfully", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(context, "Order has been placed unsuccessfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                         }
                     }
                 } else {
@@ -122,8 +132,6 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                 }
             }
         });
-//        Uri url_to_uri = Uri.parse(url);
-//        storage.getReference().child("Orders").putFile(url_to_uri);
     }
 
 

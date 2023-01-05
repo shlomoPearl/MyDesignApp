@@ -50,8 +50,8 @@ public class SupplierMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.supplier_activity_main);
-        choose_file = findViewById(R.id.design);
-        upload = findViewById(R.id.send);
+        choose_file = findViewById(R.id.choose_file);
+        upload = findViewById(R.id.upload);
         logout = findViewById(R.id.logout);
         show_order = findViewById(R.id.show_order);
         show_user_design = findViewById(R.id.show_user_design);
