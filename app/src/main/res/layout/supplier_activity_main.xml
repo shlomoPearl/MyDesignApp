@@ -8,31 +8,31 @@
     >
 
     <Button
-        android:id="@+id/design"
+        android:id="@+id/choose_file"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose file" />
     <Button
-        android:id="@+id/send"
+        android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
-        android:layout_toEndOf="@+id/design"
+        android:layout_toEndOf="@+id/choose_file"
         android:text="Upload" />
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_toEndOf="@+id/send"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/upload"
         android:text="logout" />
 
     <EditText
         android:id="@+id/edit_text_file_name"
         android:layout_width="150dp"
         android:layout_height="45dp"
-        android:layout_below="@+id/send"
+        android:layout_below="@+id/upload"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/edit_text_price"
@@ -43,7 +43,7 @@
         android:layout_width="150dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_below="@+id/design"
+        android:layout_below="@+id/choose_file"
         android:layout_marginTop="9dp"
         android:hint="Enter Price"
         />

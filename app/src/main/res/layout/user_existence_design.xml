@@ -8,24 +8,24 @@
     tools:context=".UserMainActivity"
     tools:ignore="HardcodedText">
 
-    <!--Button to open the image selector-->
-
-    <!--ImageView to preview the selected image-->
-    <!--    <ImageView-->
-    <!--        android:id="@+id/IVPreviewImage"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="300dp"-->
-    <!--        android:layout_below="@id/SelectImage"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginEnd="16dp" />-->
+    <TextView
+        android:id="@+id/shopping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Let's Start Shopping"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="#B8139D"
+        android:textAlignment="center"
+        android:layout_marginBottom="15dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="30dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_display_exitence" />
+        tools:listitem="@layout/item_display_existence" />
 
     <ProgressBar
         android:layout_width="wrap_content"
@@ -34,23 +34,4 @@
         android:layout_gravity="center"
         android:indeterminate="true"/>
 
-    <android.widget.RelativeLayout
-        android:id="@+id/myCoordinatorLayout"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!-- Here are the existing layout elements, now wrapped in
-             a CoordinatorLayout -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!-- …Toolbar, other layouts, other elements… -->
-
-        </LinearLayout>
-
-    </android.widget.RelativeLayout>
 </FrameLayout>

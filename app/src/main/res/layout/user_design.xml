@@ -29,23 +29,23 @@
         android:layout_below="@+id/upload"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/edit_text_price"
+        android:layout_toEndOf="@+id/bid"
         android:hint="Enter file name" />
 
     <EditText
-        android:id="@+id/edit_text_price"
+        android:id="@+id/bid"
         android:layout_width="150dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_below="@+id/choose_file"
         android:layout_marginTop="9dp"
-        android:hint="Enter Price"
-        />
+        android:hint="Enter your bid" />
+
     <EditText
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/edit_text_price"
+        android:layout_below="@+id/bid"
         android:layout_marginTop="9dp"
         android:scrollbars="vertical"
         android:hint="Enter Details about Product"
