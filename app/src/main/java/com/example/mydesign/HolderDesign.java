@@ -47,7 +47,7 @@ public class HolderDesign extends RecyclerView.Adapter<HolderDesign.ViewHolder> 
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//
+//              //
 //            }
 //        });
     }
