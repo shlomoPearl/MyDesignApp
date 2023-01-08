@@ -23,6 +23,14 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".OpenAi"
+            android:exported="false"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".HolderOrder"
             android:exported="false">
             <meta-data
@@ -61,6 +69,7 @@
         </activity>
         <activity
             android:name=".ShowUserDesignActivity"
+            android:parentActivityName=".SupplierMainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
