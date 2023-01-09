@@ -114,6 +114,7 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                             user_info.put("URL",url);
                             user_info.put("SIZE",size);
                             user_info.put("Quantity",quantity);
+                            user_info.put("Order State","false");
                             // add all the order detail to Order collection with unique id
                             df.add(user_info).addOnCompleteListener(new OnCompleteListener() {
                                 @Override

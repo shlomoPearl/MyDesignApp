@@ -47,11 +47,14 @@ public class ShowUserDesignActivity extends AppCompatActivity {
                             String url = document.get("Image URL").toString();
                             String file_name = document.get("File Name").toString();
                             String description = document.get("Product Description").toString();
+                            String order_state = document.get("Order State").toString();
                             String[] user_details = {"User Name - "+user_name, "Email - "+email
-                                    ,"Bid - " + bid, "Product Name - "+file_name, "Product Description - "+description};
-                            image_list.add(url);
-                            info.add(user_details);
-
+                                    ,"Bid - " + bid, "Product Name - "+file_name,
+                                    "Product Description - "+description, order_state};
+                            if (order_state.equals("false")) {
+                                image_list.add(url);
+                                info.add(user_details);
+                            }
                         }
                         Log.d(TAG, list.toString());
                         recyclerView.setAdapter(image_display);
