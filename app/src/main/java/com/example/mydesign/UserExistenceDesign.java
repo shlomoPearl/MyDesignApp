@@ -39,6 +39,7 @@ public class UserExistenceDesign extends AppCompatActivity {
     private Uri image_uri;
     private ArrayList<String> image_list;
     private ArrayList<String> id_list;
+    private ArrayList<Integer> price_list;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private ImageDisplayExistence image_display;
@@ -53,8 +54,9 @@ public class UserExistenceDesign extends AppCompatActivity {
         setContentView(R.layout.user_existence_design);
         image_list = new ArrayList<>();
         id_list = new ArrayList<>();
+        price_list = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview1);
-        image_display = new ImageDisplayExistence(image_list, id_list, this);
+        image_display = new ImageDisplayExistence(image_list, id_list,price_list,  this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
@@ -67,6 +69,7 @@ public class UserExistenceDesign extends AppCompatActivity {
                         System.out.println(document.getData());
                         image_list.add(document.getString("Image URL"));
                         id_list.add(document.getString("Supplier ID"));
+                        price_list.add(Integer.valueOf(document.getString("Price")));
                     }
                     image_display.notifyDataSetChanged();
                     recyclerView.setAdapter(image_display);

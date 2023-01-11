@@ -24,6 +24,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -36,10 +37,36 @@ import java.util.Map;
 public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExistence.ViewHolder> {
     private ArrayList<String> imageList;
     private ArrayList<String> id_list;
+    private ArrayList<Integer> price_list;
     public Context context;
     private String[] quantity_table = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     private String[] size_table = {"S", "M", "L", "XL", "XXL"};
     private String size;
+    private FirebaseFirestore store = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private HashMap<String, Object> user_order = new HashMap<String, Object>(){{
+        put("Supplier ID", null);
+        put("Supplier Phone", null);
+        put("Supplier Name", null);
+        put("Supplier Email", null);
+        put("Supplier Address", null);
+        put("Quantity", null);
+        put("Size", null);
+        put("Total Price", null);
+        put("Order State", null);
+        put("URL", null);
+    }};
+    private HashMap<String, Object> supplier_order = new HashMap<String, Object>(){{
+        put("User ID", user.getUid());
+        put("User Name", null);
+        put("Name", null);
+        put("User Email", user.getEmail());
+        put("Quantity", null);
+        put("Size", null);
+        put("Total Price", null);
+        put("Order State", null);
+        put("URL", null);
+    }};
 
     @NonNull
     @Override
@@ -72,8 +99,10 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         String quantity = quantity_table[which];
+                                        int total_price = price_list.get(position)
+                                                        * Integer.parseInt(quantity);
                                         confirmOrder(imageList.get(position), id_list.get(position)
-                                                , size, quantity);
+                                                , size, quantity, total_price);
                                     }
                             });
                             AlertDialog quantity_dialog = quantity_build.create();
@@ -91,40 +120,69 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
             }
         });
     }
-    public void confirmOrder(String url, String supplier_id ,String size, String quantity){
-        FirebaseFirestore store = FirebaseFirestore.getInstance();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+    public void confirmOrder(String url, String supplier_id ,String size, String quantity, int total_price){
+        /**
+         get user info and put into supplier_order hashmap this upload to supplier order
+         insert those field - "UserName", "Name", "User ID", "User Email", "Price"
+         "Quantity", "Size", "Total Price", "Order State", "URL"
+         **/
         store.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if(document.getId().equals(user.getUid())){
-                            // get user info
-                            String email = document.get("Email").toString();
+
                             String name = document.get("Name").toString();
                             String user_name = document.get("User Name").toString();
-                            // create collection Order
-                            CollectionReference df = store.collection("Admins").
-                                    document(supplier_id).collection("Order");
-                            Map<String, Object> user_info = new HashMap<>();
-                            user_info.put("User Name",user_name);
-                            user_info.put("Name",name);
-                            user_info.put("Email",email);
-                            user_info.put("URL",url);
-                            user_info.put("SIZE",size);
-                            user_info.put("Quantity",quantity);
-                            user_info.put("Order State","false");
-                            // add all the order detail to Order collection with unique id
-                            df.add(user_info).addOnCompleteListener(new OnCompleteListener() {
+                            supplier_order.put("Name", name);
+                            supplier_order.put("User Name", user_name);
+                            supplier_order.put("SIZE", size);
+                            supplier_order.put("Quantity", quantity);
+                            supplier_order.put("URL", url);
+                            supplier_order.put("Total Price", total_price);
+                            supplier_order.put("Order State", "false");
+                            store.collection("Admins").document(supplier_id)
+                                    .collection("Order").add(supplier_order);
+
+                            /**
+                             * get supplier info and put into user_order hashmap. this upload to user order
+                             * insert those field - "Supplier ID", "Supplier Phone", "Supplier Name","Supplier Email",
+                             *                      "Supplier Address","Total Price", "Quantity", "Size",
+                             *                      "Total Price", "Order State", "URL"
+                             **/
+                            store.collection("Admins").document(supplier_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task task) {
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(context, "Order has been placed successfully", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(context, "Order has been placed unsuccessfully", Toast.LENGTH_SHORT).show();
+                                        DocumentSnapshot document =  task.getResult();
+                                        String supplier_name = document.get("Company Name").toString();
+                                        String supplier_phone = document.get("Phone Number").toString();
+                                        String supplier_email = document.get("Email").toString();
+                                        String supplier_address = document.get("Address").toString();
+                                        user_order.put("Supplier ID", supplier_id);
+                                        user_order.put("SIZE", size);
+                                        user_order.put("Quantity", quantity);
+                                        user_order.put("URL", url);
+                                        user_order.put("Total Price", total_price);
+                                        user_order.put("Order State", "false");
+                                        user_order.put("Supplier Phone", supplier_phone);
+                                        user_order.put("Supplier Name", supplier_name);
+                                        user_order.put("Supplier Email", supplier_email);
+                                        user_order.put("Supplier Address", supplier_address);
+                                        store.collection("Users").document(user.getUid())
+                                                .collection("Orders").add(user_order)
+                                                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Toast.makeText(context, " Your order has been placed", Toast.LENGTH_SHORT).show();
+                                                        } else {
+                                                            Toast.makeText(context, "Order Failed", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+
                                     }
                                 }
                             });
@@ -152,8 +210,9 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
         }
     }
 
-    public ImageDisplayExistence(ArrayList<String> imageList,ArrayList<String> id_list, Context context) {
+    public ImageDisplayExistence(ArrayList<String> imageList,ArrayList<String> id_list, ArrayList<Integer> price_list,Context context) {
         this.imageList = imageList;
+        this.price_list = price_list;
         this.id_list = id_list;
         this.context = context;
     }

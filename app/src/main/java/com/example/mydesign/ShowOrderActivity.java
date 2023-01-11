@@ -51,6 +51,8 @@ public class ShowOrderActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     List<String> list = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
+                        System.out.println(document.getId() + " => " + document.getData());
+                        System.out.println(document.get("URL").toString());
                         if (document.contains("Bid")){
                             String bid = document.get("Bid").toString();
                             String description = document.get("Description").toString();
@@ -65,7 +67,7 @@ public class ShowOrderActivity extends AppCompatActivity {
                             String quantity = document.get("Quantity").toString();
                             String size = document.get("SIZE").toString();
                             String user_name = document.get("User Name").toString();
-                            String email = document.get("Email").toString();
+                            String email = document.get("User Email").toString();
                             String url = document.get("URL").toString();
                             String order_state = document.get("Order State").toString();
                             String[] user_details = {"User Name - " + user_name, "Email - " + email,
