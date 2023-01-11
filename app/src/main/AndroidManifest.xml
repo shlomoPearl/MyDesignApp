@@ -75,15 +75,16 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".SupplierOrder"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+<!--        <activity-->
+<!--            android:name=".SupplierOrder"-->
+<!--            android:exported="false">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
         <activity
             android:name=".UserSignUp"
+            android:parentActivityName=".UserStart"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -91,6 +92,7 @@
         </activity>
         <activity
             android:name=".SupplierSignIn"
+            android:parentActivityName=".SupplierStart"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -135,6 +137,7 @@
         </activity>
         <activity
             android:name=".SupplierSignUp"
+            android:parentActivityName=".SupplierStart"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -144,6 +147,7 @@
         </activity>
         <activity
             android:name=".UserSignIn"
+            android:parentActivityName=".UserStart"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

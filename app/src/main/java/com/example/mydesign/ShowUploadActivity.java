@@ -3,6 +3,7 @@ package com.example.mydesign;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ public class ShowUploadActivity extends AppCompatActivity {
     private ArrayList<String[]> info;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private TextView count;
     private HolderSupplierUpload image_display;
     private FirebaseFirestore store;
     @Override
@@ -27,6 +29,7 @@ public class ShowUploadActivity extends AppCompatActivity {
         setContentView(R.layout.show_upload);
         image_list = new ArrayList<>();
         info = new ArrayList<>();
+        count = findViewById(R.id.catalog);
         recyclerView = findViewById(R.id.recyclerview);
         image_display = new HolderSupplierUpload(image_list,info , this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
@@ -47,6 +50,7 @@ public class ShowUploadActivity extends AppCompatActivity {
                     }
                 }
             }
+            count.setText("Total Item In Catalog - " + image_list.size());
             recyclerView.setAdapter(image_display);
         });
 

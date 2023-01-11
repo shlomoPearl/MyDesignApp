@@ -12,7 +12,7 @@
         android:id="@+id/user_design"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Designs"
+        android:text=""
         android:textStyle="bold"
         android:textSize="25dp"
         android:textAlignment="center"

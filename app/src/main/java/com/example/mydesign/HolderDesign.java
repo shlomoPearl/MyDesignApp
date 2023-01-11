@@ -80,7 +80,8 @@ public class HolderDesign extends RecyclerView.Adapter<HolderDesign.ViewHolder> 
                                                 user_info.put("File Name",info.get(position)[3]);
                                                 user_info.put("Description",info.get(position)[4]);
                                                 user_info.put("Bid",info.get(position)[2]);
-                                                user_info.put("Order State","true");
+                                                user_info.put("Order State","false");
+//                                                user_info.put("Caught","true");
                                                 new_order.add(user_info).addOnCompleteListener(new OnCompleteListener() {
                                                     @Override
                                                     public void onComplete(@NonNull Task task) {

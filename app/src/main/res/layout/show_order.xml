@@ -12,7 +12,7 @@
         android:id="@+id/order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Orders"
+        android:text=""
         android:textStyle="bold"
         android:textSize="25dp"
         android:textAlignment="center"

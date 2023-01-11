@@ -54,6 +54,7 @@
         />
 
     <ImageView
+
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,7 +62,20 @@
         android:layout_marginTop="16dp" />
 
 
-<!--    <ProgressBar-->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="183dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
+        android:visibility="invisible" />
+
+
+    <!--    <ProgressBar-->
 <!--        android:id="@+id/progress_bar"-->
 <!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
 <!--        android:layout_width="match_parent"-->

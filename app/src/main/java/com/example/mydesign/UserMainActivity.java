@@ -36,15 +36,12 @@ public class UserMainActivity extends AppCompatActivity {
         existing_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserMainActivity.this, "jump to user activity!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(UserMainActivity.this, UserExistenceDesign.class));
             }
         });
         your_own_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(UserMainActivity.this, "jump to user design!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(UserMainActivity.this, UserDesign.class));
             }
         });

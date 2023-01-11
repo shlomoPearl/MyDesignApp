@@ -67,8 +67,6 @@ public class UserSignIn extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    Toast.makeText(UserSignIn.this, "Update the profile " +
-                            "for better expereince", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(UserSignIn.this , UserMainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);

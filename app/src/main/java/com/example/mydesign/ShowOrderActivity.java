@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class ShowOrderActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private HolderOrder image_display;
     private FirebaseFirestore store;
+    private TextView count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ShowOrderActivity extends AppCompatActivity {
         setContentView(R.layout.show_order);
         image_list = new ArrayList<>();
         info = new ArrayList<>();
+        count = findViewById(R.id.order);
         recyclerView = findViewById(R.id.recyclerview);
         image_display = new HolderOrder(image_list,info , this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
@@ -73,6 +76,7 @@ public class ShowOrderActivity extends AppCompatActivity {
 
 
                     }
+                    count.setText("Total Order - " + image_list.size());
                     Log.d(TAG, list.toString());
                     recyclerView.setAdapter(image_display);
                 } else {

@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class ShowUserDesignActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private HolderDesign image_display;
     private FirebaseFirestore store;
+    private TextView count;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class ShowUserDesignActivity extends AppCompatActivity {
             image_list = new ArrayList<>();
             info = new ArrayList<>();
             recyclerView = findViewById(R.id.recyclerview);
+            count = findViewById(R.id.user_design);
             image_display = new HolderDesign(image_list,info , this);
             recyclerView.setLayoutManager(new LinearLayoutManager(null));
             store = FirebaseFirestore.getInstance();
@@ -56,6 +59,7 @@ public class ShowUserDesignActivity extends AppCompatActivity {
                                 info.add(user_details);
                             }
                         }
+                        count.setText("Total User Design - " + image_list.size());
                         Log.d(TAG, list.toString());
                         recyclerView.setAdapter(image_display);
                     } else {
