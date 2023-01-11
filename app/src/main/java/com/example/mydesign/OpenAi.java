@@ -12,7 +12,7 @@ import java.net.URL;
 
 //
 public class OpenAi {
-    private final String token = "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";
+    private final String token = System.getenv("OPENAI_API_KEY");
     private String prompt;
     private String url;
     public OpenAi(String prompt) {
