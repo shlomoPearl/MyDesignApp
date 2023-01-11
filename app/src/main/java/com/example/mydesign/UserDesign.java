@@ -186,6 +186,9 @@ public class UserDesign extends AppCompatActivity {
                                     design_info.put("Email", email);
                                     design_info.put("Order State", "false");
                                     db.collection("User Design").add(design_info);
+
+                                    db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .collection("Design").add(design_info);
                                     pd.cancel();
                                     Toast.makeText(UserDesign.this, "Design send Successfully", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(UserDesign.this, UserDesign.class));
