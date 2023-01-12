@@ -15,9 +15,16 @@
         android:theme="@style/Theme.Mydesign"
         tools:targetApi="31">
         <activity
-            android:name=".UserCartShopping"
-            android:parentActivityName=".UserMainActivity"
+            android:name=".SupplierMenu"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UserCartShopping"
+            android:exported="false"
+            android:parentActivityName=".UserMainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -43,21 +50,20 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-<!--        <activity-->
-<!--            android:name=".HolderOrder"-->
-<!--            android:exported="false">-->
-<!--            <meta-data-->
-<!--                android:name="android.app.lib_name"-->
-<!--                android:value="" />-->
-<!--        </activity>-->
-<!--        <activity-->
-<!--            android:name=".HolderSupplierUpload"-->
-<!--            android:exported="false">-->
-<!--            <meta-data-->
-<!--                android:name="android.app.lib_name"-->
-<!--                android:value="" />-->
-<!--        </activity>-->
+        </activity> <!-- <activity -->
+        <!-- android:name=".HolderOrder" -->
+        <!-- android:exported="false"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.app.lib_name" -->
+        <!-- android:value="" /> -->
+        <!-- </activity> -->
+        <!-- <activity -->
+        <!-- android:name=".HolderSupplierUpload" -->
+        <!-- android:exported="false"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.app.lib_name" -->
+        <!-- android:value="" /> -->
+        <!-- </activity> -->
         <activity
             android:name=".SupplierMainActivity"
             android:exported="false">
@@ -91,13 +97,11 @@
         </activity>
         <activity
             android:name=".HolderShoppingCart"
-            android:exported="false"
-            >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- <activity -->
+        </activity> <!-- <activity -->
         <!-- android:name=".SupplierOrder" -->
         <!-- android:exported="false"> -->
         <!-- <meta-data -->
