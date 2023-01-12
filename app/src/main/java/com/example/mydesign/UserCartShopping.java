@@ -43,35 +43,37 @@ public class UserCartShopping extends UserMenu {
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         store = FirebaseFirestore.getInstance();
         progressBar.setVisibility(ProgressBar.VISIBLE);
+
         store.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("Orders").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
+                    count.setText("You have " + task.getResult().getDocuments().size()+ " items in your cart");
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                            String supplier_name = document.get("Supplier Name").toString();
-                            String phone = document.get("Supplier Phone").toString();
-                            String address = document.get("Supplier Address").toString();
-                            String email = document.get("Supplier Email").toString();
-                            String quantity = document.get("Quantity").toString();
-                            String size = document.get("Size").toString();
-                            String total_price = document.get("Total Price").toString();
-                            String order_state = document.get("Order State").toString();
-                            String url = document.get("URL").toString();
-                            System.out.println("%%%%%" + url);
-                            String[] user_details = {supplier_name,phone, address ,email, quantity,
-                                                    size, total_price, order_state};
-                            image_list.add(url);
-                            info.add(user_details);
-                            count.setText("You have " + image_list.size() + " orders");
-                            recyclerView.setAdapter(image_display);
-                            progressBar.setVisibility(ProgressBar.INVISIBLE);
+                        String supplier_name = document.get("Supplier Name").toString();
+                        String phone = document.get("Supplier Phone").toString();
+                        String address = document.get("Supplier Address").toString();
+                        String email = document.get("Supplier Email").toString();
+                        String quantity = document.get("Quantity").toString();
+                        String size = document.get("SIZE").toString();
+                        String total_price = document.get("Total Price").toString();
+                        String order_state = document.get("Order State").toString();
+                        String url = document.get("URL").toString();
+                        String[] user_details = {supplier_name,phone, address ,email, quantity,
+                                                size, total_price, order_state};
+                        image_list.add(url);
+                        info.add(user_details);
+//                        count.setText("You have " + image_list.size() + " orders");
+                        recyclerView.setAdapter(image_display);
+                        progressBar.setVisibility(ProgressBar.INVISIBLE);
                     }
+                    progressBar.setVisibility(ProgressBar.INVISIBLE);
                 } else {
+                    progressBar.setVisibility(ProgressBar.INVISIBLE);
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
-
     }
 }
