@@ -51,8 +51,6 @@ public class ShowOrderActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     List<String> list = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        System.out.println(document.getId() + " => " + document.getData());
-                        System.out.println(document.get("URL").toString());
                         if (document.contains("Bid")){
                             String bid = document.get("Bid").toString();
                             String description = document.get("Description").toString();
@@ -75,8 +73,6 @@ public class ShowOrderActivity extends AppCompatActivity {
                             image_list.add(url);
                             info.add(user_details);
                         }
-
-
                     }
                     count.setText("Total Order - " + image_list.size());
                     Log.d(TAG, list.toString());
