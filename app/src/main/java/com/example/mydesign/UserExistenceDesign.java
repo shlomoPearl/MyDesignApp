@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.mydesign.menu.UserMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,7 +22,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class UserExistenceDesign extends UserMenu {
-    private Uri image_uri;
     private ArrayList<String> image_list;
     private ArrayList<String> id_list;
     private ArrayList<Integer> price_list;
@@ -28,18 +29,18 @@ public class UserExistenceDesign extends UserMenu {
     private ProgressBar progressBar;
     private ImageDisplayExistence image_display;
     private FirebaseFirestore db;
-    // clothes_uploads is the brunch that all image are upload there
-//    StorageReference listRef = FirebaseStorage.getInstance().getReference().child("clothes_uploads");
-
+    private TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_existence_design);
+        setContentView(R.layout.recycleview);
         image_list = new ArrayList<>();
         id_list = new ArrayList<>();
         price_list = new ArrayList<>();
-        recyclerView = findViewById(R.id.recyclerview1);
+        recyclerView = findViewById(R.id.recyclerview);
+        progressBar = findViewById(R.id.progress);
+        message = findViewById(R.id.show_text);
         image_display = new ImageDisplayExistence(image_list, id_list,price_list,  this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         progressBar = findViewById(R.id.progress);
@@ -49,20 +50,27 @@ public class UserExistenceDesign extends UserMenu {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
+                    if (task.getResult().size() == 0) {
+                        message.setText("No Products Available");
+                        progressBar.setVisibility(View.GONE);
+                        return;
+                    }
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println(document.getData());
                         image_list.add(document.getString("Image URL"));
                         id_list.add(document.getString("Supplier ID"));
                         price_list.add(Integer.valueOf(document.getString("Price")));
+                        message.setText("Let's Start Shopping");
+                        message.setTextColor(Color.parseColor("#B8139D"));
                     }
                     image_display.notifyDataSetChanged();
                     recyclerView.setAdapter(image_display);
                     progressBar.setVisibility(View.GONE);
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     Log.d("TAG", "Error getting documents: ", task.getException());
                 }
             }
         });
     }
-
 }
