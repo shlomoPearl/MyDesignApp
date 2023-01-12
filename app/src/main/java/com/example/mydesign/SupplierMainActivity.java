@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -121,14 +122,20 @@ public class SupplierMainActivity extends AppCompatActivity {
                                         String f_n = file_name.getText().toString();
                                         String p = price.getText().toString();
                                         String p_d = product_description.getText().toString();
-                                        HashMap<String, Object> catlog = new HashMap<>();
-                                        catlog.put("File Name", f_n);
-                                        catlog.put("Price", p);
-                                        catlog.put("Product Description", p_d);
-                                        catlog.put("Image URL", url);
-                                        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                        catlog.put("Supplier ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                        db.collection("Supplier Uploads").add(catlog);
+                                        HashMap<String, Object> catalog = new HashMap<>();
+                                        Task<DocumentSnapshot> document = db.collection("Admins")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .get();
+                                        if (document.isSuccessful()) {
+                                            String company_name = document.getResult().getString("Company Name");
+                                            catalog.put("Company Name", company_name);
+                                        }
+                                        catalog.put("File Name", f_n);
+                                        catalog.put("Price", p);
+                                        catalog.put("Product Description", p_d);
+                                        catalog.put("Image URL", url);
+                                        catalog.put("Supplier ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                        db.collection("Supplier Uploads").add(catalog);
                                         pd.cancel();
                                         Toast.makeText(SupplierMainActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(SupplierMainActivity.this, SupplierMainActivity.class));
