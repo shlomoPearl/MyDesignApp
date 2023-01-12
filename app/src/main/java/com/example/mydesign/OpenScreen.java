@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class OpenScreen extends Exit {
+public class OpenScreen extends AppCompatActivity {
 
     private Button admin;
     private Button user;
