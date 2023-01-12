@@ -4,6 +4,8 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,17 +26,19 @@ public class ShowUserDesignActivity extends AppCompatActivity {
     private ArrayList<String[]> info;
     private RecyclerView recyclerView;
     private HolderDesign image_display;
+    private ProgressBar progressBar;
     private FirebaseFirestore store;
     private TextView count;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.show_user_design);
+            setContentView(R.layout.recycleview);
             image_list = new ArrayList<>();
             info = new ArrayList<>();
             recyclerView = findViewById(R.id.recyclerview);
-            count = findViewById(R.id.user_design);
+            count = findViewById(R.id.show_text);
+            progressBar = findViewById(R.id.progress);
             image_display = new HolderDesign(image_list,info , this);
             recyclerView.setLayoutManager(new LinearLayoutManager(null));
             store = FirebaseFirestore.getInstance();
@@ -67,6 +71,7 @@ public class ShowUserDesignActivity extends AppCompatActivity {
                     }
                 }
             });
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 

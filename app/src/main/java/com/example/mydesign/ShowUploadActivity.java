@@ -26,11 +26,12 @@ public class ShowUploadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_upload);
+        setContentView(R.layout.recycleview);
         image_list = new ArrayList<>();
         info = new ArrayList<>();
-        count = findViewById(R.id.catalog);
+        count = findViewById(R.id.show_text);
         recyclerView = findViewById(R.id.recyclerview);
+        progressBar = findViewById(R.id.progress);
         image_display = new HolderSupplierUpload(image_list,info , this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         store = FirebaseFirestore.getInstance();
@@ -52,10 +53,7 @@ public class ShowUploadActivity extends AppCompatActivity {
             }
             count.setText("Total Item In Catalog - " + image_list.size());
             recyclerView.setAdapter(image_display);
+            progressBar.setVisibility(View.INVISIBLE);
         });
-
     }
-
-
-
 }

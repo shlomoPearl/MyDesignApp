@@ -2,10 +2,8 @@ package com.example.mydesign;
 
 import static android.content.ContentValues.TAG;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,15 +28,17 @@ public class ShowOrderActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private HolderOrder image_display;
     private FirebaseFirestore store;
+    private ProgressBar progressBar;
     private TextView count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_order);
+        setContentView(R.layout.recycleview);
         image_list = new ArrayList<>();
         info = new ArrayList<>();
-        count = findViewById(R.id.order);
+        progressBar = findViewById(R.id.progress);
+        count = findViewById(R.id.show_text);
         recyclerView = findViewById(R.id.recyclerview);
         image_display = new HolderOrder(image_list,info , this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
@@ -81,6 +81,7 @@ public class ShowOrderActivity extends AppCompatActivity {
                     count.setText("Total Order - " + image_list.size());
                     Log.d(TAG, list.toString());
                     recyclerView.setAdapter(image_display);
+                    progressBar.setVisibility(ProgressBar.INVISIBLE);
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }
