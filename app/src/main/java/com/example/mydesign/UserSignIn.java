@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UserSignIn extends AppCompatActivity {
+public class UserSignIn extends Exit {
 
     private EditText email;
     private EditText password;
@@ -43,6 +43,7 @@ public class UserSignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserSignIn.this , UserSignUp.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
             }
         });
 

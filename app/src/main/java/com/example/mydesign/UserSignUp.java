@@ -26,7 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserSignUp extends AppCompatActivity {
+public class UserSignUp extends Exit {
 
     private EditText username;
     private EditText name;
@@ -59,6 +59,7 @@ public class UserSignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserSignUp.this , UserSignIn.class));
+                finish();
             }
         });
 

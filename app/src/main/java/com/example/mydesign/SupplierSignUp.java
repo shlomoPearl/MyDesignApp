@@ -24,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SupplierSignUp extends AppCompatActivity {
+public class SupplierSignUp extends Exit {
 
     private EditText company_name;
     private EditText address;

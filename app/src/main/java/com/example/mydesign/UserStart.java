@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class UserStart extends AppCompatActivity {
+public class UserStart extends Exit {
 
     private Button sign_up; // for new user
     private Button sign_in; // for exist user
