@@ -1,11 +1,7 @@
 package com.example.mydesign;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import java.util.Observable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.mydesign.menu.UserMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,7 +42,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class UserDesign extends AppCompatActivity {
+public class UserDesign extends UserMenu {
     private Button design;
     private Button send;
     private EditText file_name;
@@ -70,19 +67,7 @@ public class UserDesign extends AppCompatActivity {
         product_description = findViewById(R.id.description);
         progress_bar = findViewById(R.id.progress_bar);
         context = this;
-//        GetUrl callback = new GetUrl() {
-//            @Override
-//            public void onUrlRetrieved(String url_ret) {
-//                url = url_ret;
-//                Log.d("URL",url);
-//            }
-//        };
-//        design.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showFileChoose();
-//            }
-//        });
+
         design.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
