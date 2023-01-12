@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,11 +22,11 @@ import java.util.ArrayList;
 
 public class UserExistenceDesign extends UserMenu {
     private ArrayList<String> image_list;
-    private ArrayList<String> id_list;
-    private ArrayList<Integer> price_list;
+    private ArrayList<String[]> info;
+//    private ArrayList<Integer> price_list;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private ImageDisplayExistence image_display;
+    private HolderExistenceDesign image_display;
     private FirebaseFirestore db;
     private TextView message;
 
@@ -36,12 +35,12 @@ public class UserExistenceDesign extends UserMenu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycleview);
         image_list = new ArrayList<>();
-        id_list = new ArrayList<>();
-        price_list = new ArrayList<>();
+        info = new ArrayList<>();
+//        price_list = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview);
         progressBar = findViewById(R.id.progress);
         message = findViewById(R.id.show_text);
-        image_display = new ImageDisplayExistence(image_list, id_list,price_list,  this);
+        image_display = new HolderExistenceDesign(image_list, info,  this);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
@@ -58,12 +57,18 @@ public class UserExistenceDesign extends UserMenu {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println(document.getData());
                         image_list.add(document.getString("Image URL"));
-                        id_list.add(document.getString("Supplier ID"));
-                        price_list.add(Integer.valueOf(document.getString("Price")));
+                        String id = document.getString("Supplier ID");
+                        String company = document.getString("Company Name");
+                        String name = document.getString("File Name");
+                        String price = document.getString("Price");
+                        String description = document.getString("Product Description");
+
+                        String[] item_info = {id, company, name, description, price};
                         message.setText("Let's Start Shopping");
                         message.setTextColor(Color.parseColor("#B8139D"));
+                        info.add(item_info);
+
                     }
-                    image_display.notifyDataSetChanged();
                     recyclerView.setAdapter(image_display);
                     progressBar.setVisibility(View.GONE);
                 } else {

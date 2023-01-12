@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,24 +21,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
-public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExistence.ViewHolder> {
+public class HolderExistenceDesign extends RecyclerView.Adapter<HolderExistenceDesign.ViewHolder> {
     private ArrayList<String> imageList;
-    private ArrayList<String> id_list;
-    private ArrayList<Integer> price_list;
+    private ArrayList<String[]> info;
     public Context context;
     private String[] quantity_table = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     private String[] size_table = {"S", "M", "L", "XL", "XXL"};
@@ -51,7 +47,7 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
         put("Supplier Email", null);
         put("Supplier Address", null);
         put("Quantity", null);
-        put("Size", null);
+        put("SIZE", null);
         put("Total Price", null);
         put("Order State", null);
         put("URL", null);
@@ -62,21 +58,32 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
         put("Name", null);
         put("User Email", user.getEmail());
         put("Quantity", null);
-        put("Size", null);
+        put("SIZE", null);
         put("Total Price", null);
         put("Order State", null);
         put("URL", null);
     }};
 
+    public HolderExistenceDesign(ArrayList<String> imageList, ArrayList<String[]> info, Context context) {
+        this.imageList = imageList;
+        this.info = info;
+        this.context = context;
+    }
+
     @NonNull
     @Override
-    public ImageDisplayExistence.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_display_existence,parent,false);
+    public HolderExistenceDesign.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_existence_design,parent,false);
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ImageDisplayExistence.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull HolderExistenceDesign.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.supplier_name.setText(holder.supplier_name.getText()+info.get(position)[1]);
+        holder.file_name.setText(info.get(position)[2]);
+        holder.description.setText(holder.description.getText()+info.get(position)[3]);
+        holder.price.setText(info.get(position)[4]);
         Glide.with(holder.itemView.getContext()).load(imageList.get(position)).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,9 +106,9 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         String quantity = quantity_table[which];
-                                        int total_price = price_list.get(position)
+                                        int total_price = Integer.parseInt(info.get(position)[4])
                                                         * Integer.parseInt(quantity);
-                                        confirmOrder(imageList.get(position), id_list.get(position)
+                                        confirmOrder(imageList.get(position), info.get(position)[0]
                                                 , size, quantity, total_price);
                                     }
                             });
@@ -204,19 +211,14 @@ public class ImageDisplayExistence extends RecyclerView.Adapter<ImageDisplayExis
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        TextView supplier_name,file_name, description,price;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.item);
+            imageView=itemView.findViewById(R.id.image);
+            supplier_name=itemView.findViewById(R.id.company_name);
+            file_name=itemView.findViewById(R.id.file_name);
+            description =itemView.findViewById(R.id.description);
+            price=itemView.findViewById(R.id.price);
         }
     }
-
-    public ImageDisplayExistence(ArrayList<String> imageList,ArrayList<String> id_list, ArrayList<Integer> price_list,Context context) {
-        this.imageList = imageList;
-        this.price_list = price_list;
-        this.id_list = id_list;
-        this.context = context;
-    }
-
-
-
 }
