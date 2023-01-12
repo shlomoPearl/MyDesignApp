@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:text="Order has Complete"/>
+                android:text="I want to implement this design"/>
             <TextView
                 android:id="@+id/username"
                 android:layout_below="@+id/checkbox"

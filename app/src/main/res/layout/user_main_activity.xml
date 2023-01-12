@@ -6,27 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".UserMainActivity">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="logout" />
-
-    <Button
-        android:id="@+id/existing_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="295sp"
-        android:layout_centerHorizontal="true"
-        android:text="Choose from an existence design" />
-
-    <Button
-        android:id="@+id/your_own_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="245sp"
-        android:layout_centerHorizontal="true"
-        android:text="Choose your own design" />
+<!--    <Button-->
+<!--        android:id="@+id/logout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="logout" />-->
 
     <TextView
         android:id="@+id/welcome3"
@@ -37,6 +21,25 @@
         android:text="lets start design your cloth:)"
         android:textColor="@color/teal_700"
         android:textSize="30dp" />
+    <Button
+        android:id="@+id/your_own_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/welcome3"
+        android:layout_centerHorizontal="true"
+        android:text="Choose your own design" />
+
+    <Button
+        android:id="@+id/existing_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/your_own_btn"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="Choose from an existence design" />
+
+
 
 
 </RelativeLayout>
