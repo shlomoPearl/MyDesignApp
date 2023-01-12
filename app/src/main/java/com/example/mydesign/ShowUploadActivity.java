@@ -9,13 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mydesign.menu.SupplierMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class ShowUploadActivity extends AppCompatActivity {
+public class ShowUploadActivity extends SupplierMenu {
     private ArrayList<String> image_list;
     private ArrayList<String[]> info;
     private RecyclerView recyclerView;

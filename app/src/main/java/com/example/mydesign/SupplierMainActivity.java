@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mydesign.menu.SupplierMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +35,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-public class SupplierMainActivity extends AppCompatActivity {
+public class SupplierMainActivity extends SupplierMenu {
     private static final int CHOOSE_IMAGE = 1;
     private Button choose_file;
     private Button upload;
