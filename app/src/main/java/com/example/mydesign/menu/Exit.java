@@ -1,4 +1,4 @@
-package com.example.mydesign;
+package com.example.mydesign.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.mydesign.R;
 
 public class Exit extends AppCompatActivity {
 

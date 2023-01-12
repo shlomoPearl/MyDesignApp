@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mydesign.OpenScreen;
 import com.example.mydesign.R;
+import com.example.mydesign.UserCartShopping;
+import com.example.mydesign.UserSignIn;
+import com.example.mydesign.UserSignUp;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserMenu extends AppCompatActivity {
@@ -28,7 +31,7 @@ public class UserMenu extends AppCompatActivity {
                 System.out.println("setting");
                 return true;
             case R.id.cart:
-                System.out.println("cart");
+                startActivity(new Intent(UserMenu.this, UserCartShopping.class));
                 return true;
             case R.id.exit:
                 FirebaseAuth.getInstance().signOut();
