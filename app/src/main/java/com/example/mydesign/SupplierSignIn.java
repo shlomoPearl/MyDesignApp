@@ -28,7 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class SupplierSignIn extends Exit {
+public class SupplierSignIn extends AppCompatActivity {
 
     private EditText email;
     private EditText password;

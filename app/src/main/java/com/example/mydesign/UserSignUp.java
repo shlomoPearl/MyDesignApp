@@ -26,7 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserSignUp extends Exit {
+public class UserSignUp extends AppCompatActivity {
 
     private EditText username;
     private EditText name;
