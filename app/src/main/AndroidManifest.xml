@@ -15,6 +15,21 @@
         android:theme="@style/Theme.Mydesign"
         tools:targetApi="31">
         <activity
+            android:name=".UserCartShopping"
+            android:parentActivityName=".UserMainActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".menu.Exit"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UserDesign"
             android:exported="false"
             android:parentActivityName=".UserMainActivity">
@@ -24,26 +39,25 @@
         </activity>
         <activity
             android:name=".OpenAi"
-            android:exported="false"
-            >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".HolderOrder"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".HolderSupplierUpload"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+<!--        <activity-->
+<!--            android:name=".HolderOrder"-->
+<!--            android:exported="false">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
+<!--        <activity-->
+<!--            android:name=".HolderSupplierUpload"-->
+<!--            android:exported="false">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
         <activity
             android:name=".SupplierMainActivity"
             android:exported="false">
@@ -69,31 +83,39 @@
         </activity>
         <activity
             android:name=".ShowUserDesignActivity"
-            android:parentActivityName=".SupplierMainActivity"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".SupplierMainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-<!--        <activity-->
-<!--            android:name=".SupplierOrder"-->
-<!--            android:exported="false">-->
-<!--            <meta-data-->
-<!--                android:name="android.app.lib_name"-->
-<!--                android:value="" />-->
-<!--        </activity>-->
+        <activity
+            android:name=".HolderShoppingCart"
+            android:exported="false"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <!-- <activity -->
+        <!-- android:name=".SupplierOrder" -->
+        <!-- android:exported="false"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.app.lib_name" -->
+        <!-- android:value="" /> -->
+        <!-- </activity> -->
         <activity
             android:name=".UserSignUp"
-            android:parentActivityName=".UserStart"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".UserStart">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".SupplierSignIn"
-            android:parentActivityName=".SupplierStart"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".SupplierStart">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -137,8 +159,8 @@
         </activity>
         <activity
             android:name=".SupplierSignUp"
-            android:parentActivityName=".SupplierStart"
-            android:exported="true">
+            android:exported="true"
+            android:parentActivityName=".SupplierStart">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -147,7 +169,16 @@
         </activity>
         <activity
             android:name=".UserSignIn"
-            android:parentActivityName=".UserStart"
+            android:exported="true"
+            android:parentActivityName=".UserStart">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".menu.UserMenu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
