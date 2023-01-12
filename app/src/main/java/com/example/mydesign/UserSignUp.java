@@ -92,6 +92,10 @@ public class UserSignUp extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
                 FirebaseUser user = mAuth.getCurrentUser();
+                store.collection("Users").document(user.getUid())
+                        .collection("Orders").document();
+                store.collection("Users").document(user.getUid())
+                        .collection("Design").document();
                 DocumentReference df = store.collection("Users").document(user.getUid());
                 Map<String, Object> user_info = new HashMap<>();
                 user_info.put("User Name",username);
