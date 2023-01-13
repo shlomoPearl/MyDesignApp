@@ -46,7 +46,7 @@ public class ShowUploadActivity extends SupplierMenu {
                         String price = document.get("Price").toString();
                         String description = document.get("Product Description").toString();
                         String url = document.get("Image URL").toString();
-                        String[] upload_details = {title,"price - " + price + " $",description};
+                        String[] upload_details = {price , "Title - "+title,"Description - "+description};
                         image_list.add(url);
                         info.add(upload_details);
                     }

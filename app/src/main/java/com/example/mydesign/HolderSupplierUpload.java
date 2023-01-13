@@ -38,8 +38,8 @@ public class HolderSupplierUpload extends RecyclerView.Adapter<HolderSupplierUpl
 
     @Override
     public void onBindViewHolder(@NonNull HolderSupplierUpload.ViewHolder holder, int position) {
-        holder.title.setText(info_list.get(position)[0]);
-        holder.price.setText(info_list.get(position)[1]);
+        holder.price.setText(info_list.get(position)[0]);
+        holder.title.setText(info_list.get(position)[1]);
         holder.description.setText(info_list.get(position)[2]);
         Glide.with(holder.itemView.getContext()).load(image_list.get(position)).into(holder.image);
     }
