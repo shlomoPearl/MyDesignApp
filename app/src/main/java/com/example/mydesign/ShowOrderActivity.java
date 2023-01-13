@@ -50,33 +50,33 @@ public class ShowOrderActivity extends SupplierMenu {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    List<String> list = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.contains("Bid")){
                             String bid = document.get("Bid").toString();
                             String description = document.get("Description").toString();
-                            String user_name = document.get("User Name").toString();
+                            String file = document.get("File Name").toString();
+                            String user_name = document.get("Name").toString();
                             String email = document.get("Email").toString();
                             String url = document.get("URL").toString();
                             String order_state = document.get("Order State").toString();
-                            String[] user_details = {user_name, email, bid, description, order_state};
+                            String[] user_details = {user_name, email,"Product Name - " +file,"Description - "+description, "Price - "+bid, order_state};
                             image_list.add(url);
                             info.add(user_details);
                         }else {
                             String quantity = document.get("Quantity").toString();
                             String size = document.get("SIZE").toString();
-                            String user_name = document.get("User Name").toString();
+                            String user_name = document.get("Name").toString();
                             String email = document.get("User Email").toString();
+                            String total_price = document.get("Total Price").toString();
                             String url = document.get("URL").toString();
                             String order_state = document.get("Order State").toString();
-                            String[] user_details = {"User Name - " + user_name, "Email - " + email,
-                                    "Quantity - " + quantity, "Size - " + size, order_state};
+                            String[] user_details = {user_name, email,"Quantity - " + quantity,
+                                    "Size - "+size,"Total price - "+total_price ,order_state};
                             image_list.add(url);
                             info.add(user_details);
                         }
                     }
                     count.setText("Total Order - " + image_list.size());
-                    Log.d(TAG, list.toString());
                     recyclerView.setAdapter(image_display);
                     progressBar.setVisibility(ProgressBar.INVISIBLE);
                 } else {

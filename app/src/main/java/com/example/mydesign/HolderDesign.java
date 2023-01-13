@@ -71,17 +71,17 @@ public class HolderDesign extends RecyclerView.Adapter<HolderDesign.ViewHolder> 
                                             if (document.get("Image URL").toString().equals(imageList.get(position))){
                                                 store.collection("User Design").
                                                         document(document.getId()).update("Order State","true");
+                                                Map<String, Object> user_info = new HashMap<>();
+                                                user_info.put("User Name",document.get("User Name").toString());
+                                                user_info.put("Email",document.get("Email").toString());
+                                                user_info.put("URL",document.get("Image URL").toString());
+                                                user_info.put("File Name",document.get("File Name").toString());
+                                                user_info.put("Description",document.get("Product Description").toString());
+                                                user_info.put("Bid",document.get("Bid").toString());
+                                                user_info.put("Name",document.get("Name").toString());
+                                                user_info.put("Order State","false");
                                                 CollectionReference new_order = store.collection("Admins").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                         .collection("Order");
-                                                Map<String, Object> user_info = new HashMap<>();
-                                                user_info.put("User Name",info.get(position)[0]);
-                                                user_info.put("Email",info.get(position)[1]);
-                                                user_info.put("URL",imageList.get(position));
-                                                user_info.put("File Name",info.get(position)[3]);
-                                                user_info.put("Description",info.get(position)[4]);
-                                                user_info.put("Bid",info.get(position)[2]);
-                                                user_info.put("Order State","false");
-//                                                user_info.put("Caught","true");
                                                 new_order.add(user_info).addOnCompleteListener(new OnCompleteListener() {
                                                     @Override
                                                     public void onComplete(@NonNull Task task) {
@@ -114,12 +114,6 @@ public class HolderDesign extends RecyclerView.Adapter<HolderDesign.ViewHolder> 
             }
         });
         Glide.with(holder.itemView.getContext()).load(imageList.get(position)).into(holder.imageView);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//              //try commit
-//            }
-//        });
     }
 
 

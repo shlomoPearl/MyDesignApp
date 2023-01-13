@@ -62,6 +62,14 @@ public class HolderShoppingCart extends RecyclerView.Adapter<HolderShoppingCart.
         }
         holder.checkBox.setEnabled(false);
         Glide.with(holder.itemView.getContext()).load(imageList.get(position)).into(holder.imageView);
+        holder.phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + info.get(position)[1]));
+                context.startActivity(intent);
+            }
+        });
     }
 
 

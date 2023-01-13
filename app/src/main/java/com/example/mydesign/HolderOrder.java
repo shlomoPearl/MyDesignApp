@@ -47,12 +47,13 @@ public class HolderOrder extends RecyclerView.Adapter<HolderOrder.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull HolderOrder.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.user_name.setText(info.get(position)[0]);
+        holder.purchase_details.setText(holder.purchase_details.getText().toString()+info.get(position)[0]);
         holder.email.setText(info.get(position)[1]);
         holder.quantity.setText(info.get(position)[2]);
         holder.size.setText(info.get(position)[3]);
-        holder.checkBox.setChecked(info.get(position)[4].equals("true"));
-        if (info.get(position)[4].equals("true")){
+        holder.total_price.setText(info.get(position)[4]);
+        holder.checkBox.setChecked(info.get(position)[5].equals("true"));
+        if (info.get(position)[5].equals("true")){
             holder.checkBox.setTextColor(Color.GREEN);
         }
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
@@ -95,13 +96,6 @@ public class HolderOrder extends RecyclerView.Adapter<HolderOrder.ViewHolder> {
             }
         });
         Glide.with(holder.itemView.getContext()).load(imageList.get(position)).into(holder.imageView);
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
     }
 
 
@@ -113,15 +107,17 @@ public class HolderOrder extends RecyclerView.Adapter<HolderOrder.ViewHolder> {
         ImageView imageView;
         TextView email;
         TextView quantity;
-        TextView user_name;
         TextView size;
+        TextView total_price;
+        TextView purchase_details;
         CheckBox checkBox;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.image);
             email=itemView.findViewById(R.id.email);
             quantity=itemView.findViewById(R.id.quantity);
-            user_name=itemView.findViewById(R.id.username);
+            total_price=itemView.findViewById(R.id.total_price);
+            purchase_details=itemView.findViewById(R.id.purchase_detail);
             size=itemView.findViewById(R.id.size);
             checkBox=itemView.findViewById(R.id.checkbox);
         }
