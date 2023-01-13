@@ -49,15 +49,13 @@ public class HolderDesign extends RecyclerView.Adapter<HolderDesign.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull HolderDesign.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.user_name.setText(info.get(position)[0]);
+        holder.user_name.setText(holder.user_name.getText().toString()+info.get(position)[0]);
         holder.email.setText(info.get(position)[1]);
         holder.bid.setText(info.get(position)[2]);
-        holder.file_name.setText(info.get(position)[3]);
+        holder.product_name.setText(info.get(position)[3]);
         holder.description.setText(info.get(position)[4]);
         holder.checkBox.setChecked(info.get(position)[5].equals("true"));
-        if (info.get(position)[5].equals("true")){
-            holder.checkBox.setTextColor(Color.GREEN);
-        }
+
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,17 +124,17 @@ public class HolderDesign extends RecyclerView.Adapter<HolderDesign.ViewHolder> 
         ImageView imageView;
         TextView email;
         TextView description;
-        TextView file_name;
         TextView user_name;
         TextView bid;
+        TextView product_name;
         CheckBox checkBox;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            file_name = itemView.findViewById(R.id.file_name);
             imageView=itemView.findViewById(R.id.image);
             email=itemView.findViewById(R.id.email);
-            description =itemView.findViewById(R.id.product_description);
-            user_name=itemView.findViewById(R.id.username);
+            product_name=itemView.findViewById(R.id.product_name);
+            description =itemView.findViewById(R.id.description);
+            user_name=itemView.findViewById(R.id.purchase_detail);
             bid =itemView.findViewById(R.id.bid);
             checkBox=itemView.findViewById(R.id.checkbox);
         }

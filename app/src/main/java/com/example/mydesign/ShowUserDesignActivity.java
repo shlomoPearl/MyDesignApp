@@ -32,48 +32,46 @@ public class ShowUserDesignActivity extends SupplierMenu {
     private FirebaseFirestore store;
     private TextView count;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.recycleview);
-            image_list = new ArrayList<>();
-            info = new ArrayList<>();
-            recyclerView = findViewById(R.id.recyclerview);
-            count = findViewById(R.id.show_text);
-            progressBar = findViewById(R.id.progress);
-            image_display = new HolderDesign(image_list,info , this);
-            recyclerView.setLayoutManager(new LinearLayoutManager(null));
-            store = FirebaseFirestore.getInstance();
-            store.collection("User Design").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        List<String> list = new ArrayList<>();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String user_name = document.get("User Name").toString();
-                            String email = document.get("Email").toString();
-                            String bid = document.get("Bid").toString();
-                            String url = document.get("Image URL").toString();
-                            String file_name = document.get("File Name").toString();
-                            String description = document.get("Product Description").toString();
-                            String order_state = document.get("Order State").toString();
-                            String[] user_details = {"User Name - "+user_name, "Email - "+email
-                                    ,"Bid - " + bid, "Product Name - "+file_name,
-                                    "Product Description - "+description, order_state};
-                            if (order_state.equals("false")) {
-                                image_list.add(url);
-                                info.add(user_details);
-                            }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.recycleview);
+        image_list = new ArrayList<>();
+        info = new ArrayList<>();
+        recyclerView = findViewById(R.id.recyclerview);
+        count = findViewById(R.id.show_text);
+        progressBar = findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
+        image_display = new HolderDesign(image_list,info , this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(null));
+        store = FirebaseFirestore.getInstance();
+        store.collection("User Design").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String user_name = document.get("Name").toString();
+                        String email = document.get("Email").toString();
+                        String bid = document.get("Bid").toString();
+                        String url = document.get("Image URL").toString();
+                        String file_name = document.get("File Name").toString();
+                        String description = document.get("Product Description").toString();
+                        String order_state = document.get("Order State").toString();
+                        String[] user_details = {user_name,email,"Bid - "+ bid, "Product Name - "+file_name,
+                                "Description - "+description, order_state};
+                        if (order_state.equals("false")) {
+                            image_list.add(url);
+                            info.add(user_details);
                         }
-                        count.setText("Total User Design - " + image_list.size());
-                        Log.d(TAG, list.toString());
-                        recyclerView.setAdapter(image_display);
-                    } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
                     }
+                    count.setText("Total User Design - " + image_list.size());
+                    recyclerView.setAdapter(image_display);
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
-            });
-            progressBar.setVisibility(View.INVISIBLE);
-        }
+            }
+        });
+        progressBar.setVisibility(View.INVISIBLE);
     }
+}
 
