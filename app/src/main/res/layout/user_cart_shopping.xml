@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,13 +13,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <CheckBox
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Order has Complete"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:text="Order has Complete"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -27,9 +30,6 @@
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
                 android:padding="2dp" />
-
-
-
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -52,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Call us in - "
+                android:drawableStart="@drawable/ic_baseline_local_blue_phone_24"
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="15sp">
@@ -63,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Our address - "
+                android:drawableStart="@drawable/ic_outline_black_location_on_24"
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/black"
                 android:textSize="15sp">
@@ -76,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:text="Send email - "
+                android:drawableStart="@drawable/ic_baseline_black_mail_outline_24"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
             <TextView
@@ -105,6 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
+                android:drawableStart="@drawable/ic_baseline_attach_black_dollar_24"
                 android:text="Total Price - "
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
