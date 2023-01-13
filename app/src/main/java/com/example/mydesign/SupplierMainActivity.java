@@ -39,7 +39,6 @@ public class SupplierMainActivity extends SupplierMenu {
     private static final int CHOOSE_IMAGE = 1;
     private Button choose_file;
     private Button upload;
-    private Button logout;
     private TextView show_order;
     private TextView show_user_design;
     private TextView show_upload;
@@ -54,7 +53,6 @@ public class SupplierMainActivity extends SupplierMenu {
         setContentView(R.layout.supplier_activity_main);
         choose_file = findViewById(R.id.choose_file);
         upload = findViewById(R.id.upload);
-        logout = findViewById(R.id.logout);
         show_order = findViewById(R.id.show_order);
         show_user_design = findViewById(R.id.show_user_design);
         show_upload = findViewById(R.id.show_uploads);
@@ -63,14 +61,6 @@ public class SupplierMainActivity extends SupplierMenu {
         product_description = findViewById(R.id.description);
         image_preview = findViewById(R.id.image_view);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(SupplierMainActivity.this, OpenScreen.class));
-                finish();
-            }
-        });
         choose_file.setOnClickListener(view -> showFileChoose());
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
