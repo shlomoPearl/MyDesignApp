@@ -12,10 +12,12 @@ import java.net.URL;
 
 //
 public class OpenAi {
-    private final String token = System.getenv("OPENAI_API_KEY");
+    private final String token = "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";
+
     private String prompt;
     private String url;
     public OpenAi(String prompt) {
+        System.out.println("token is " + token);
         this.prompt = prompt;
         new SendRequestTask().execute(prompt);
 
@@ -67,6 +69,7 @@ public class OpenAi {
 
                 // Print the response
                 char c = '"';
+                System.out.println(response);
                 String[] url_split = response.toString().split(String.valueOf(c));
                 System.out.println(url_split[7]);
                 return url_split[7];

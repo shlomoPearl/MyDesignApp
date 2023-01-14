@@ -73,8 +73,8 @@ public class UserDesign extends UserMenu {
             public void onClick(View v) {
                 // setup the alert builder
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("DALL-E 2");
-                builder.setMessage("Let's start making your design");
+                builder.setTitle("Self Design");
+                builder.setMessage("An accurate description addresses the need design for you");
                 prompt = new EditText(context);
                 prompt.setHint("Enter your prompt");
                 builder.setView(prompt);

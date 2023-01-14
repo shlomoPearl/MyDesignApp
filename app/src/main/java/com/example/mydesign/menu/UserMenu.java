@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mydesign.OpenScreen;
 import com.example.mydesign.R;
 import com.example.mydesign.UserCartShopping;
+import com.example.mydesign.UserProfile;
 import com.example.mydesign.UserSignIn;
 import com.example.mydesign.UserSignUp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +29,7 @@ public class UserMenu extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.setting:
-                System.out.println("setting");
+                startActivity(new Intent(UserMenu.this, UserProfile.class));
                 return true;
             case R.id.cart:
                 startActivity(new Intent(UserMenu.this, UserCartShopping.class));

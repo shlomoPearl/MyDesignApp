@@ -13,7 +13,7 @@
                 android:id="@+id/setting"
                 app:showAsAction="always"
                 android:icon="@drawable/ic_baseline_settings_24"
-                android:title="Settings" />
+                android:title="Profile" />
 
             <item
                 android:icon="@drawable/ic_baseline_logout_24"

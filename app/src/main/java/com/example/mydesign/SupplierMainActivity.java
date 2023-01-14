@@ -118,6 +118,7 @@ public class SupplierMainActivity extends SupplierMenu {
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .get();
                                         if (document.isSuccessful()) {
+                                            System.out.println("@@@@@@@@@@@@");
                                             String company_name = document.getResult().getString("Company Name");
                                             catalog.put("Company Name", company_name);
                                         }

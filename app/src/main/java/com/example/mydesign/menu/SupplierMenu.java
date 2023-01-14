@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.mydesign.OpenScreen;
 import com.example.mydesign.R;
+import com.example.mydesign.SupplierProfile;
 import com.example.mydesign.UserCartShopping;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -26,7 +27,7 @@ public class SupplierMenu extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.setting:
-                System.out.println("setting");
+                startActivity(new Intent(SupplierMenu.this, SupplierProfile.class));
                 return true;
             case R.id.exit:
                 FirebaseAuth.getInstance().signOut();
