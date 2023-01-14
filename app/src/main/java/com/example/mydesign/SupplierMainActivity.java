@@ -110,27 +110,34 @@ public class SupplierMainActivity extends SupplierMenu {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
-                                        String f_n = file_name.getText().toString();
-                                        String p = price.getText().toString();
-                                        String p_d = product_description.getText().toString();
-                                        HashMap<String, Object> catalog = new HashMap<>();
-                                        Task<DocumentSnapshot> document = db.collection("Admins")
-                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .get();
-                                        if (document.isSuccessful()) {
-                                            System.out.println("@@@@@@@@@@@@");
-                                            String company_name = document.getResult().getString("Company Name");
-                                            catalog.put("Company Name", company_name);
-                                        }
-                                        catalog.put("File Name", f_n);
-                                        catalog.put("Price", p);
-                                        catalog.put("Product Description", p_d);
-                                        catalog.put("Image URL", url);
-                                        catalog.put("Supplier ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                        db.collection("Supplier Uploads").add(catalog);
-                                        pd.cancel();
-                                        Toast.makeText(SupplierMainActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(SupplierMainActivity.this, SupplierMainActivity.class));
+
+                                        db.collection("Admins").document(FirebaseAuth.getInstance().getUid())
+                                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot document = task.getResult();
+                                                            if (document.exists()) {
+                                                                HashMap<String, Object> catalog = new HashMap<>();
+                                                                String f_n = file_name.getText().toString();
+                                                                String p = price.getText().toString();
+                                                                String p_d = product_description.getText().toString();
+                                                                String company_name = document.getString("Company Name");
+                                                                catalog.put("Company Name", company_name);
+                                                                catalog.put("File Name", f_n);
+                                                                catalog.put("Price", p);
+                                                                catalog.put("Product Description", p_d);
+                                                                catalog.put("Image URL", url);
+                                                                catalog.put("Supplier ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                                                db.collection("Supplier Uploads").add(catalog);
+                                                                pd.cancel();
+                                                                Toast.makeText(SupplierMainActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
+                                                                startActivity(new Intent(SupplierMainActivity.this, SupplierMainActivity.class));
+                                                            }
+                                                        }
+                                                    }
+                                                });
+
                                     } else {
                                         Log.d(TAG, "Error getting documents: ", task.getException());
                                     }
