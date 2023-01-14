@@ -12,7 +12,7 @@ import java.net.URL;
 
 //
 public class OpenAi {
-    private final String token = "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";
+    private final String token = "Token";
 
     private String prompt;
     private String url;
