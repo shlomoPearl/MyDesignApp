@@ -3,7 +3,6 @@ package com.example.mydesign.menu;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,8 +10,6 @@ import android.widget.Toast;
 
 import com.example.mydesign.OpenScreen;
 import com.example.mydesign.R;
-import com.example.mydesign.SupplierProfile;
-import com.example.mydesign.UserCartShopping;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SupplierMenu extends AppCompatActivity {
@@ -27,7 +24,7 @@ public class SupplierMenu extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.setting:
-                startActivity(new Intent(SupplierMenu.this, SupplierProfile.class));
+//                startActivity(new Intent(SupplierMenu.this, SupplierProfile.class));
                 return true;
             case R.id.exit:
                 FirebaseAuth.getInstance().signOut();
